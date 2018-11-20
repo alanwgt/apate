@@ -1,14 +1,31 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-content>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div class="search-wrapper">
+    <ion-item id="search">
+      <ion-label><ion-icon name="search"></ion-icon></ion-label>
+      <ion-input type="email" clearInput placeholder="search for user..." (keyup)="userQ($event.target.value)"></ion-input>
+    </ion-item>
+    <button (click)="openSettings()">
+      <ion-icon name="settings"></ion-icon>
+    </button>
+  </div>
+  
+  <div class="footer">
+ 
+    <button class="footer-btn z-depth-3" (click)="openConversations()">
+      <ion-badge class="a-badge">3</ion-badge>
+      <ion-icon name="text"></ion-icon>
+    </button>
+
+    <button class="footer-btn footer-btn__middle z-depth-5" (click)="takePicture()">
+      <ion-icon name="aperture"></ion-icon>
+      <!-- <div id="ionball" class="z-depth-3"></div> -->
+    </button>
+
+    <button class="footer-btn z-depth-3" (click)="openTrophies()">
+      <ion-icon name="trophy"></ion-icon>
+    </button>
+    
+  </div>
+
 </ion-content>

@@ -1,0 +1,50 @@
+<!--
+  Generated template for the AuthenticationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Create an account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <ion-img src="/assets/imgs/logo.png"></ion-img> -->
+  <div class="inputs">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4 offset-4>
+          <img src="/assets/imgs/ghost.svg">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label color="primary" floating>Username</ion-label>
+            <ion-input type="text" #username autocapitalize="off" type="email"></ion-input>
+          </ion-item>
+          <p class="info">*minimum of 4 chars</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- <ion-col>
+          <button ion-button full (click)="auth()">sign-in</button>
+        </ion-col> -->
+        <ion-col>
+          <button ion-button full (click)="signup()">sign-up</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <button class="blink">recover account</button>
+      </ion-row>
+      <ion-row>
+        <button class="blink">what is apate?</button>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

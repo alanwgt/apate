@@ -1,0 +1,35 @@
+page-authentication {
+  ion-img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+
+    img {
+      width: 50vw;
+    }
+  }
+
+  .blink {
+    background: none;
+    text-decoration: underline;
+    color: #2196F3;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .inputs {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ion-row {
+    margin: 20px 0 ;
+  }
+
+}

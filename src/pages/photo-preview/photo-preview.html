@@ -1,0 +1,15 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>PhotoPreview</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-img src="{{ dataB64Image }}"></ion-img>
+  <ion-fab bottom right (click)="selectRecipients()">
+    <button ion-fab><ion-icon name="send"></ion-icon></button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,36 @@
+pages:
+  home:
+    ✘ add animations on hover @low @cancelled(18-10-30 13:57)
+      there is no hover in a native app, wtf
+
+  photoPreview:
+    ✔ add checkbox alert to the user select the recipients @high @done(18-10-30 13:57)
+
+  conversations:
+    ☐ find better suitted icons
+
+src:
+  crypto:
+    ☐ crypto needs to access the storage to retrieve the secret key
+
+random:
+  ☐ manage android permissions
+
+
+about page:
+  ☐ ref author icon Freepik on flaticon (splash ghost)
+
+Compile Protos to static
+npx pbjs -t static-module -w commonjs -o ./src/proto/bundle.js ./src/proto/*.proto
+npx pbts -o ./src/proto/bundle.d.ts ./src/proto/bundle.js
+npm run build-proto
+
+'Cmd/Ctrl+Enter' // Triggers `Todo: Toggle Box`
+'Alt+D' // Triggers `Todo: Toggle Done`
+'Alt+C' // Triggers `Todo: Toggle Cancelled`
+'Alt+S' // Triggers `Todo: Toggle Start`
+'Cmd/Ctrl+Shift+A' // Triggers  `Todo: Archive`
+`code`
+*bold*
+_italic_
+~strikethrough~

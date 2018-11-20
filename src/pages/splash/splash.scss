@@ -1,0 +1,57 @@
+page-splash {
+    overflow: hidden;
+
+    ion-row {
+        background: $mBlue;
+    }
+
+    ion-col {
+        display: flex;
+
+        img {
+            margin: 0 auto;
+            height: 50vh;
+        }
+    }
+
+    .splash-message {
+        text-align: center;
+        font-style: italic;
+        position: absolute;
+        top: 10vh;
+        width: 80%;
+        color: white;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    img {
+        animation-name: boo;
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+    }
+
+    @keyframes boo {
+        from {
+            margin-bottom: 0;
+        }
+
+        to {
+            margin-bottom: 20%;
+        }
+    }
+
+    ion-spinner {
+        width: 28px;
+        height: 28px;
+
+        position: absolute;
+        bottom: 10vh;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
+}

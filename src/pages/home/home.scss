@@ -1,3 +1,67 @@
 page-home {
 
+  button {
+    background: none;
+  }
+
+  .search-wrapper {
+
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    justify-content: space-evenly;
+    background: white;
+    border-radius: 5px;
+
+    #search {
+      width: 80vw;
+      border-radius: 5px;
+    }
+    
+    ion-icon {
+        font-size: 30px;
+        color: $a-primary;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+  }
+
+  #ionball {
+    background-image: url(../assets/imgs/ionball.png);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+  }
+
+  .footer-btn {
+    text-decoration: none;
+    color: $a-primary;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+
+  .footer-btn__middle {
+      width: 90px;
+      height: 90px;
+      ion-icon {
+          font-size: 72px;
+      }
+  }
 }
