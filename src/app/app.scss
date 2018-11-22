@@ -64,12 +64,15 @@ button {
 }
 
 .toast-success {
-
+  > div {
+    background: #4CAF50 !important;
+    color: black !important;
+  }
 }
 
 .toast-error {
-    > div {
-        background: #d50000 !important;
-        color: white !important;
-    }
+  > div {
+    background: #d50000 !important;
+    color: white !important;
+  }
 }
