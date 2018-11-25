@@ -7,3 +7,43 @@ message AccountSignUp {
     string fcm_token = 3;
 }
 
+message UserModel {
+    string username = 1;
+    string pub_k = 2;
+}
+
+message FriendRequest {
+    string username = 1;
+    string pub_k = 2;
+    int64 timestamp = 3;
+}
+
+message Message {
+    int64 message_id = 1;
+    string from = 2;
+    string to = 3;
+    int64 timestamp = 4;
+    bool deletable = 5;
+}
+
+message MessageBody {
+    enum Type {
+        Text = 0;
+        Image = 1;
+    }
+    int64 message_id = 1;
+    string body = 2;
+    string nonce = 3;
+    Type type = 4;
+}
+
+message MessagesContainer {
+    repeated MessageBody messages = 1;
+}
+
+message AccountHandshake {
+    repeated UserModel contacts = 1;
+    repeated FriendRequest friend_requests = 2;
+    repeated Message new_messages = 3;
+    bool has_recovery_key = 4;
+}

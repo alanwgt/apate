@@ -104,6 +104,633 @@ export namespace protos {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a UserModel. */
+    interface IUserModel {
+
+        /** UserModel username */
+        username?: (string|null);
+
+        /** UserModel pubK */
+        pubK?: (string|null);
+    }
+
+    /** Represents a UserModel. */
+    class UserModel implements IUserModel {
+
+        /**
+         * Constructs a new UserModel.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IUserModel);
+
+        /** UserModel username. */
+        public username: string;
+
+        /** UserModel pubK. */
+        public pubK: string;
+
+        /**
+         * Creates a new UserModel instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns UserModel instance
+         */
+        public static create(properties?: protos.IUserModel): protos.UserModel;
+
+        /**
+         * Encodes the specified UserModel message. Does not implicitly {@link protos.UserModel.verify|verify} messages.
+         * @param message UserModel message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IUserModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified UserModel message, length delimited. Does not implicitly {@link protos.UserModel.verify|verify} messages.
+         * @param message UserModel message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IUserModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a UserModel message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UserModel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.UserModel;
+
+        /**
+         * Decodes a UserModel message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns UserModel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.UserModel;
+
+        /**
+         * Verifies a UserModel message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a UserModel message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns UserModel
+         */
+        public static fromObject(object: { [k: string]: any }): protos.UserModel;
+
+        /**
+         * Creates a plain object from a UserModel message. Also converts values to other types if specified.
+         * @param message UserModel
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.UserModel, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this UserModel to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a FriendRequest. */
+    interface IFriendRequest {
+
+        /** FriendRequest username */
+        username?: (string|null);
+
+        /** FriendRequest pubK */
+        pubK?: (string|null);
+
+        /** FriendRequest timestamp */
+        timestamp?: (number|Long|null);
+    }
+
+    /** Represents a FriendRequest. */
+    class FriendRequest implements IFriendRequest {
+
+        /**
+         * Constructs a new FriendRequest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IFriendRequest);
+
+        /** FriendRequest username. */
+        public username: string;
+
+        /** FriendRequest pubK. */
+        public pubK: string;
+
+        /** FriendRequest timestamp. */
+        public timestamp: (number|Long);
+
+        /**
+         * Creates a new FriendRequest instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns FriendRequest instance
+         */
+        public static create(properties?: protos.IFriendRequest): protos.FriendRequest;
+
+        /**
+         * Encodes the specified FriendRequest message. Does not implicitly {@link protos.FriendRequest.verify|verify} messages.
+         * @param message FriendRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IFriendRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified FriendRequest message, length delimited. Does not implicitly {@link protos.FriendRequest.verify|verify} messages.
+         * @param message FriendRequest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IFriendRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a FriendRequest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns FriendRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.FriendRequest;
+
+        /**
+         * Decodes a FriendRequest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns FriendRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.FriendRequest;
+
+        /**
+         * Verifies a FriendRequest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a FriendRequest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns FriendRequest
+         */
+        public static fromObject(object: { [k: string]: any }): protos.FriendRequest;
+
+        /**
+         * Creates a plain object from a FriendRequest message. Also converts values to other types if specified.
+         * @param message FriendRequest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.FriendRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this FriendRequest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a Message. */
+    interface IMessage {
+
+        /** Message messageId */
+        messageId?: (number|Long|null);
+
+        /** Message from */
+        from?: (string|null);
+
+        /** Message to */
+        to?: (string|null);
+
+        /** Message timestamp */
+        timestamp?: (number|Long|null);
+
+        /** Message deletable */
+        deletable?: (boolean|null);
+    }
+
+    /** Represents a Message. */
+    class Message implements IMessage {
+
+        /**
+         * Constructs a new Message.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IMessage);
+
+        /** Message messageId. */
+        public messageId: (number|Long);
+
+        /** Message from. */
+        public from: string;
+
+        /** Message to. */
+        public to: string;
+
+        /** Message timestamp. */
+        public timestamp: (number|Long);
+
+        /** Message deletable. */
+        public deletable: boolean;
+
+        /**
+         * Creates a new Message instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Message instance
+         */
+        public static create(properties?: protos.IMessage): protos.Message;
+
+        /**
+         * Encodes the specified Message message. Does not implicitly {@link protos.Message.verify|verify} messages.
+         * @param message Message message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Message message, length delimited. Does not implicitly {@link protos.Message.verify|verify} messages.
+         * @param message Message message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Message message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Message
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.Message;
+
+        /**
+         * Decodes a Message message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Message
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.Message;
+
+        /**
+         * Verifies a Message message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Message message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Message
+         */
+        public static fromObject(object: { [k: string]: any }): protos.Message;
+
+        /**
+         * Creates a plain object from a Message message. Also converts values to other types if specified.
+         * @param message Message
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.Message, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Message to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MessageBody. */
+    interface IMessageBody {
+
+        /** MessageBody messageId */
+        messageId?: (number|Long|null);
+
+        /** MessageBody body */
+        body?: (string|null);
+
+        /** MessageBody nonce */
+        nonce?: (string|null);
+
+        /** MessageBody type */
+        type?: (protos.MessageBody.Type|null);
+    }
+
+    /** Represents a MessageBody. */
+    class MessageBody implements IMessageBody {
+
+        /**
+         * Constructs a new MessageBody.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IMessageBody);
+
+        /** MessageBody messageId. */
+        public messageId: (number|Long);
+
+        /** MessageBody body. */
+        public body: string;
+
+        /** MessageBody nonce. */
+        public nonce: string;
+
+        /** MessageBody type. */
+        public type: protos.MessageBody.Type;
+
+        /**
+         * Creates a new MessageBody instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MessageBody instance
+         */
+        public static create(properties?: protos.IMessageBody): protos.MessageBody;
+
+        /**
+         * Encodes the specified MessageBody message. Does not implicitly {@link protos.MessageBody.verify|verify} messages.
+         * @param message MessageBody message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IMessageBody, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MessageBody message, length delimited. Does not implicitly {@link protos.MessageBody.verify|verify} messages.
+         * @param message MessageBody message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IMessageBody, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MessageBody message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MessageBody
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.MessageBody;
+
+        /**
+         * Decodes a MessageBody message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MessageBody
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.MessageBody;
+
+        /**
+         * Verifies a MessageBody message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MessageBody message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MessageBody
+         */
+        public static fromObject(object: { [k: string]: any }): protos.MessageBody;
+
+        /**
+         * Creates a plain object from a MessageBody message. Also converts values to other types if specified.
+         * @param message MessageBody
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.MessageBody, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MessageBody to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    namespace MessageBody {
+
+        /** Type enum. */
+        enum Type {
+            Text = 0,
+            Image = 1
+        }
+    }
+
+    /** Properties of a MessagesContainer. */
+    interface IMessagesContainer {
+
+        /** MessagesContainer messages */
+        messages?: (protos.IMessageBody[]|null);
+    }
+
+    /** Represents a MessagesContainer. */
+    class MessagesContainer implements IMessagesContainer {
+
+        /**
+         * Constructs a new MessagesContainer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IMessagesContainer);
+
+        /** MessagesContainer messages. */
+        public messages: protos.IMessageBody[];
+
+        /**
+         * Creates a new MessagesContainer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MessagesContainer instance
+         */
+        public static create(properties?: protos.IMessagesContainer): protos.MessagesContainer;
+
+        /**
+         * Encodes the specified MessagesContainer message. Does not implicitly {@link protos.MessagesContainer.verify|verify} messages.
+         * @param message MessagesContainer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IMessagesContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MessagesContainer message, length delimited. Does not implicitly {@link protos.MessagesContainer.verify|verify} messages.
+         * @param message MessagesContainer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IMessagesContainer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MessagesContainer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MessagesContainer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.MessagesContainer;
+
+        /**
+         * Decodes a MessagesContainer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MessagesContainer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.MessagesContainer;
+
+        /**
+         * Verifies a MessagesContainer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MessagesContainer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MessagesContainer
+         */
+        public static fromObject(object: { [k: string]: any }): protos.MessagesContainer;
+
+        /**
+         * Creates a plain object from a MessagesContainer message. Also converts values to other types if specified.
+         * @param message MessagesContainer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.MessagesContainer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MessagesContainer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an AccountHandshake. */
+    interface IAccountHandshake {
+
+        /** AccountHandshake contacts */
+        contacts?: (protos.IUserModel[]|null);
+
+        /** AccountHandshake friendRequests */
+        friendRequests?: (protos.IFriendRequest[]|null);
+
+        /** AccountHandshake newMessages */
+        newMessages?: (protos.IMessage[]|null);
+
+        /** AccountHandshake hasRecoveryKey */
+        hasRecoveryKey?: (boolean|null);
+    }
+
+    /** Represents an AccountHandshake. */
+    class AccountHandshake implements IAccountHandshake {
+
+        /**
+         * Constructs a new AccountHandshake.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IAccountHandshake);
+
+        /** AccountHandshake contacts. */
+        public contacts: protos.IUserModel[];
+
+        /** AccountHandshake friendRequests. */
+        public friendRequests: protos.IFriendRequest[];
+
+        /** AccountHandshake newMessages. */
+        public newMessages: protos.IMessage[];
+
+        /** AccountHandshake hasRecoveryKey. */
+        public hasRecoveryKey: boolean;
+
+        /**
+         * Creates a new AccountHandshake instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AccountHandshake instance
+         */
+        public static create(properties?: protos.IAccountHandshake): protos.AccountHandshake;
+
+        /**
+         * Encodes the specified AccountHandshake message. Does not implicitly {@link protos.AccountHandshake.verify|verify} messages.
+         * @param message AccountHandshake message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IAccountHandshake, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AccountHandshake message, length delimited. Does not implicitly {@link protos.AccountHandshake.verify|verify} messages.
+         * @param message AccountHandshake message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IAccountHandshake, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AccountHandshake message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AccountHandshake
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.AccountHandshake;
+
+        /**
+         * Decodes an AccountHandshake message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AccountHandshake
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.AccountHandshake;
+
+        /**
+         * Verifies an AccountHandshake message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AccountHandshake message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AccountHandshake
+         */
+        public static fromObject(object: { [k: string]: any }): protos.AccountHandshake;
+
+        /**
+         * Creates a plain object from an AccountHandshake message. Also converts values to other types if specified.
+         * @param message AccountHandshake
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.AccountHandshake, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AccountHandshake to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ServerResponse. */
     interface IServerResponse {
 

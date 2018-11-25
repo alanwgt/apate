@@ -250,6 +250,1587 @@ $root.protos = (function() {
         return AccountSignUp;
     })();
 
+    protos.UserModel = (function() {
+
+        /**
+         * Properties of a UserModel.
+         * @memberof protos
+         * @interface IUserModel
+         * @property {string|null} [username] UserModel username
+         * @property {string|null} [pubK] UserModel pubK
+         */
+
+        /**
+         * Constructs a new UserModel.
+         * @memberof protos
+         * @classdesc Represents a UserModel.
+         * @implements IUserModel
+         * @constructor
+         * @param {protos.IUserModel=} [properties] Properties to set
+         */
+        function UserModel(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserModel username.
+         * @member {string} username
+         * @memberof protos.UserModel
+         * @instance
+         */
+        UserModel.prototype.username = "";
+
+        /**
+         * UserModel pubK.
+         * @member {string} pubK
+         * @memberof protos.UserModel
+         * @instance
+         */
+        UserModel.prototype.pubK = "";
+
+        /**
+         * Creates a new UserModel instance using the specified properties.
+         * @function create
+         * @memberof protos.UserModel
+         * @static
+         * @param {protos.IUserModel=} [properties] Properties to set
+         * @returns {protos.UserModel} UserModel instance
+         */
+        UserModel.create = function create(properties) {
+            return new UserModel(properties);
+        };
+
+        /**
+         * Encodes the specified UserModel message. Does not implicitly {@link protos.UserModel.verify|verify} messages.
+         * @function encode
+         * @memberof protos.UserModel
+         * @static
+         * @param {protos.IUserModel} message UserModel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserModel.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.username != null && message.hasOwnProperty("username"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pubK);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserModel message, length delimited. Does not implicitly {@link protos.UserModel.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.UserModel
+         * @static
+         * @param {protos.IUserModel} message UserModel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserModel.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserModel message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.UserModel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.UserModel} UserModel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserModel.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.UserModel();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.username = reader.string();
+                    break;
+                case 2:
+                    message.pubK = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserModel message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.UserModel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.UserModel} UserModel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserModel.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserModel message.
+         * @function verify
+         * @memberof protos.UserModel
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserModel.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.username != null && message.hasOwnProperty("username"))
+                if (!$util.isString(message.username))
+                    return "username: string expected";
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                if (!$util.isString(message.pubK))
+                    return "pubK: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserModel message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.UserModel
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.UserModel} UserModel
+         */
+        UserModel.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.UserModel)
+                return object;
+            var message = new $root.protos.UserModel();
+            if (object.username != null)
+                message.username = String(object.username);
+            if (object.pubK != null)
+                message.pubK = String(object.pubK);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserModel message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.UserModel
+         * @static
+         * @param {protos.UserModel} message UserModel
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserModel.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.username = "";
+                object.pubK = "";
+            }
+            if (message.username != null && message.hasOwnProperty("username"))
+                object.username = message.username;
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                object.pubK = message.pubK;
+            return object;
+        };
+
+        /**
+         * Converts this UserModel to JSON.
+         * @function toJSON
+         * @memberof protos.UserModel
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserModel.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserModel;
+    })();
+
+    protos.FriendRequest = (function() {
+
+        /**
+         * Properties of a FriendRequest.
+         * @memberof protos
+         * @interface IFriendRequest
+         * @property {string|null} [username] FriendRequest username
+         * @property {string|null} [pubK] FriendRequest pubK
+         * @property {number|Long|null} [timestamp] FriendRequest timestamp
+         */
+
+        /**
+         * Constructs a new FriendRequest.
+         * @memberof protos
+         * @classdesc Represents a FriendRequest.
+         * @implements IFriendRequest
+         * @constructor
+         * @param {protos.IFriendRequest=} [properties] Properties to set
+         */
+        function FriendRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * FriendRequest username.
+         * @member {string} username
+         * @memberof protos.FriendRequest
+         * @instance
+         */
+        FriendRequest.prototype.username = "";
+
+        /**
+         * FriendRequest pubK.
+         * @member {string} pubK
+         * @memberof protos.FriendRequest
+         * @instance
+         */
+        FriendRequest.prototype.pubK = "";
+
+        /**
+         * FriendRequest timestamp.
+         * @member {number|Long} timestamp
+         * @memberof protos.FriendRequest
+         * @instance
+         */
+        FriendRequest.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new FriendRequest instance using the specified properties.
+         * @function create
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {protos.IFriendRequest=} [properties] Properties to set
+         * @returns {protos.FriendRequest} FriendRequest instance
+         */
+        FriendRequest.create = function create(properties) {
+            return new FriendRequest(properties);
+        };
+
+        /**
+         * Encodes the specified FriendRequest message. Does not implicitly {@link protos.FriendRequest.verify|verify} messages.
+         * @function encode
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {protos.IFriendRequest} message FriendRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FriendRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.username != null && message.hasOwnProperty("username"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.username);
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pubK);
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.timestamp);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified FriendRequest message, length delimited. Does not implicitly {@link protos.FriendRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {protos.IFriendRequest} message FriendRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FriendRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a FriendRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.FriendRequest} FriendRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FriendRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.FriendRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.username = reader.string();
+                    break;
+                case 2:
+                    message.pubK = reader.string();
+                    break;
+                case 3:
+                    message.timestamp = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a FriendRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.FriendRequest} FriendRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FriendRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a FriendRequest message.
+         * @function verify
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        FriendRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.username != null && message.hasOwnProperty("username"))
+                if (!$util.isString(message.username))
+                    return "username: string expected";
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                if (!$util.isString(message.pubK))
+                    return "pubK: string expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
+                    return "timestamp: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a FriendRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.FriendRequest} FriendRequest
+         */
+        FriendRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.FriendRequest)
+                return object;
+            var message = new $root.protos.FriendRequest();
+            if (object.username != null)
+                message.username = String(object.username);
+            if (object.pubK != null)
+                message.pubK = String(object.pubK);
+            if (object.timestamp != null)
+                if ($util.Long)
+                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === "string")
+                    message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === "number")
+                    message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === "object")
+                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a FriendRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.FriendRequest
+         * @static
+         * @param {protos.FriendRequest} message FriendRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        FriendRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.username = "";
+                object.pubK = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.timestamp = options.longs === String ? "0" : 0;
+            }
+            if (message.username != null && message.hasOwnProperty("username"))
+                object.username = message.username;
+            if (message.pubK != null && message.hasOwnProperty("pubK"))
+                object.pubK = message.pubK;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (typeof message.timestamp === "number")
+                    object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                else
+                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
+            return object;
+        };
+
+        /**
+         * Converts this FriendRequest to JSON.
+         * @function toJSON
+         * @memberof protos.FriendRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        FriendRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FriendRequest;
+    })();
+
+    protos.Message = (function() {
+
+        /**
+         * Properties of a Message.
+         * @memberof protos
+         * @interface IMessage
+         * @property {number|Long|null} [messageId] Message messageId
+         * @property {string|null} [from] Message from
+         * @property {string|null} [to] Message to
+         * @property {number|Long|null} [timestamp] Message timestamp
+         * @property {boolean|null} [deletable] Message deletable
+         */
+
+        /**
+         * Constructs a new Message.
+         * @memberof protos
+         * @classdesc Represents a Message.
+         * @implements IMessage
+         * @constructor
+         * @param {protos.IMessage=} [properties] Properties to set
+         */
+        function Message(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Message messageId.
+         * @member {number|Long} messageId
+         * @memberof protos.Message
+         * @instance
+         */
+        Message.prototype.messageId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Message from.
+         * @member {string} from
+         * @memberof protos.Message
+         * @instance
+         */
+        Message.prototype.from = "";
+
+        /**
+         * Message to.
+         * @member {string} to
+         * @memberof protos.Message
+         * @instance
+         */
+        Message.prototype.to = "";
+
+        /**
+         * Message timestamp.
+         * @member {number|Long} timestamp
+         * @memberof protos.Message
+         * @instance
+         */
+        Message.prototype.timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Message deletable.
+         * @member {boolean} deletable
+         * @memberof protos.Message
+         * @instance
+         */
+        Message.prototype.deletable = false;
+
+        /**
+         * Creates a new Message instance using the specified properties.
+         * @function create
+         * @memberof protos.Message
+         * @static
+         * @param {protos.IMessage=} [properties] Properties to set
+         * @returns {protos.Message} Message instance
+         */
+        Message.create = function create(properties) {
+            return new Message(properties);
+        };
+
+        /**
+         * Encodes the specified Message message. Does not implicitly {@link protos.Message.verify|verify} messages.
+         * @function encode
+         * @memberof protos.Message
+         * @static
+         * @param {protos.IMessage} message Message message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Message.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.messageId);
+            if (message.from != null && message.hasOwnProperty("from"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.from);
+            if (message.to != null && message.hasOwnProperty("to"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.to);
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.timestamp);
+            if (message.deletable != null && message.hasOwnProperty("deletable"))
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.deletable);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Message message, length delimited. Does not implicitly {@link protos.Message.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.Message
+         * @static
+         * @param {protos.IMessage} message Message message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Message.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Message message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.Message
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.Message} Message
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Message.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.Message();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.messageId = reader.int64();
+                    break;
+                case 2:
+                    message.from = reader.string();
+                    break;
+                case 3:
+                    message.to = reader.string();
+                    break;
+                case 4:
+                    message.timestamp = reader.int64();
+                    break;
+                case 5:
+                    message.deletable = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Message message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.Message
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.Message} Message
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Message.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Message message.
+         * @function verify
+         * @memberof protos.Message
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Message.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                if (!$util.isInteger(message.messageId) && !(message.messageId && $util.isInteger(message.messageId.low) && $util.isInteger(message.messageId.high)))
+                    return "messageId: integer|Long expected";
+            if (message.from != null && message.hasOwnProperty("from"))
+                if (!$util.isString(message.from))
+                    return "from: string expected";
+            if (message.to != null && message.hasOwnProperty("to"))
+                if (!$util.isString(message.to))
+                    return "to: string expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp) && !(message.timestamp && $util.isInteger(message.timestamp.low) && $util.isInteger(message.timestamp.high)))
+                    return "timestamp: integer|Long expected";
+            if (message.deletable != null && message.hasOwnProperty("deletable"))
+                if (typeof message.deletable !== "boolean")
+                    return "deletable: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a Message message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.Message
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.Message} Message
+         */
+        Message.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.Message)
+                return object;
+            var message = new $root.protos.Message();
+            if (object.messageId != null)
+                if ($util.Long)
+                    (message.messageId = $util.Long.fromValue(object.messageId)).unsigned = false;
+                else if (typeof object.messageId === "string")
+                    message.messageId = parseInt(object.messageId, 10);
+                else if (typeof object.messageId === "number")
+                    message.messageId = object.messageId;
+                else if (typeof object.messageId === "object")
+                    message.messageId = new $util.LongBits(object.messageId.low >>> 0, object.messageId.high >>> 0).toNumber();
+            if (object.from != null)
+                message.from = String(object.from);
+            if (object.to != null)
+                message.to = String(object.to);
+            if (object.timestamp != null)
+                if ($util.Long)
+                    (message.timestamp = $util.Long.fromValue(object.timestamp)).unsigned = false;
+                else if (typeof object.timestamp === "string")
+                    message.timestamp = parseInt(object.timestamp, 10);
+                else if (typeof object.timestamp === "number")
+                    message.timestamp = object.timestamp;
+                else if (typeof object.timestamp === "object")
+                    message.timestamp = new $util.LongBits(object.timestamp.low >>> 0, object.timestamp.high >>> 0).toNumber();
+            if (object.deletable != null)
+                message.deletable = Boolean(object.deletable);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Message message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.Message
+         * @static
+         * @param {protos.Message} message Message
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Message.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.messageId = options.longs === String ? "0" : 0;
+                object.from = "";
+                object.to = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.timestamp = options.longs === String ? "0" : 0;
+                object.deletable = false;
+            }
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                if (typeof message.messageId === "number")
+                    object.messageId = options.longs === String ? String(message.messageId) : message.messageId;
+                else
+                    object.messageId = options.longs === String ? $util.Long.prototype.toString.call(message.messageId) : options.longs === Number ? new $util.LongBits(message.messageId.low >>> 0, message.messageId.high >>> 0).toNumber() : message.messageId;
+            if (message.from != null && message.hasOwnProperty("from"))
+                object.from = message.from;
+            if (message.to != null && message.hasOwnProperty("to"))
+                object.to = message.to;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (typeof message.timestamp === "number")
+                    object.timestamp = options.longs === String ? String(message.timestamp) : message.timestamp;
+                else
+                    object.timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.timestamp) : options.longs === Number ? new $util.LongBits(message.timestamp.low >>> 0, message.timestamp.high >>> 0).toNumber() : message.timestamp;
+            if (message.deletable != null && message.hasOwnProperty("deletable"))
+                object.deletable = message.deletable;
+            return object;
+        };
+
+        /**
+         * Converts this Message to JSON.
+         * @function toJSON
+         * @memberof protos.Message
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Message.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Message;
+    })();
+
+    protos.MessageBody = (function() {
+
+        /**
+         * Properties of a MessageBody.
+         * @memberof protos
+         * @interface IMessageBody
+         * @property {number|Long|null} [messageId] MessageBody messageId
+         * @property {string|null} [body] MessageBody body
+         * @property {string|null} [nonce] MessageBody nonce
+         * @property {protos.MessageBody.Type|null} [type] MessageBody type
+         */
+
+        /**
+         * Constructs a new MessageBody.
+         * @memberof protos
+         * @classdesc Represents a MessageBody.
+         * @implements IMessageBody
+         * @constructor
+         * @param {protos.IMessageBody=} [properties] Properties to set
+         */
+        function MessageBody(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MessageBody messageId.
+         * @member {number|Long} messageId
+         * @memberof protos.MessageBody
+         * @instance
+         */
+        MessageBody.prototype.messageId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * MessageBody body.
+         * @member {string} body
+         * @memberof protos.MessageBody
+         * @instance
+         */
+        MessageBody.prototype.body = "";
+
+        /**
+         * MessageBody nonce.
+         * @member {string} nonce
+         * @memberof protos.MessageBody
+         * @instance
+         */
+        MessageBody.prototype.nonce = "";
+
+        /**
+         * MessageBody type.
+         * @member {protos.MessageBody.Type} type
+         * @memberof protos.MessageBody
+         * @instance
+         */
+        MessageBody.prototype.type = 0;
+
+        /**
+         * Creates a new MessageBody instance using the specified properties.
+         * @function create
+         * @memberof protos.MessageBody
+         * @static
+         * @param {protos.IMessageBody=} [properties] Properties to set
+         * @returns {protos.MessageBody} MessageBody instance
+         */
+        MessageBody.create = function create(properties) {
+            return new MessageBody(properties);
+        };
+
+        /**
+         * Encodes the specified MessageBody message. Does not implicitly {@link protos.MessageBody.verify|verify} messages.
+         * @function encode
+         * @memberof protos.MessageBody
+         * @static
+         * @param {protos.IMessageBody} message MessageBody message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessageBody.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.messageId);
+            if (message.body != null && message.hasOwnProperty("body"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.body);
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nonce);
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MessageBody message, length delimited. Does not implicitly {@link protos.MessageBody.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.MessageBody
+         * @static
+         * @param {protos.IMessageBody} message MessageBody message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessageBody.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MessageBody message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.MessageBody
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.MessageBody} MessageBody
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessageBody.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.MessageBody();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.messageId = reader.int64();
+                    break;
+                case 2:
+                    message.body = reader.string();
+                    break;
+                case 3:
+                    message.nonce = reader.string();
+                    break;
+                case 4:
+                    message.type = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MessageBody message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.MessageBody
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.MessageBody} MessageBody
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessageBody.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MessageBody message.
+         * @function verify
+         * @memberof protos.MessageBody
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MessageBody.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                if (!$util.isInteger(message.messageId) && !(message.messageId && $util.isInteger(message.messageId.low) && $util.isInteger(message.messageId.high)))
+                    return "messageId: integer|Long expected";
+            if (message.body != null && message.hasOwnProperty("body"))
+                if (!$util.isString(message.body))
+                    return "body: string expected";
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                if (!$util.isString(message.nonce))
+                    return "nonce: string expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                switch (message.type) {
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                    break;
+                }
+            return null;
+        };
+
+        /**
+         * Creates a MessageBody message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.MessageBody
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.MessageBody} MessageBody
+         */
+        MessageBody.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.MessageBody)
+                return object;
+            var message = new $root.protos.MessageBody();
+            if (object.messageId != null)
+                if ($util.Long)
+                    (message.messageId = $util.Long.fromValue(object.messageId)).unsigned = false;
+                else if (typeof object.messageId === "string")
+                    message.messageId = parseInt(object.messageId, 10);
+                else if (typeof object.messageId === "number")
+                    message.messageId = object.messageId;
+                else if (typeof object.messageId === "object")
+                    message.messageId = new $util.LongBits(object.messageId.low >>> 0, object.messageId.high >>> 0).toNumber();
+            if (object.body != null)
+                message.body = String(object.body);
+            if (object.nonce != null)
+                message.nonce = String(object.nonce);
+            switch (object.type) {
+            case "Text":
+            case 0:
+                message.type = 0;
+                break;
+            case "Image":
+            case 1:
+                message.type = 1;
+                break;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MessageBody message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.MessageBody
+         * @static
+         * @param {protos.MessageBody} message MessageBody
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MessageBody.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.messageId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.messageId = options.longs === String ? "0" : 0;
+                object.body = "";
+                object.nonce = "";
+                object.type = options.enums === String ? "Text" : 0;
+            }
+            if (message.messageId != null && message.hasOwnProperty("messageId"))
+                if (typeof message.messageId === "number")
+                    object.messageId = options.longs === String ? String(message.messageId) : message.messageId;
+                else
+                    object.messageId = options.longs === String ? $util.Long.prototype.toString.call(message.messageId) : options.longs === Number ? new $util.LongBits(message.messageId.low >>> 0, message.messageId.high >>> 0).toNumber() : message.messageId;
+            if (message.body != null && message.hasOwnProperty("body"))
+                object.body = message.body;
+            if (message.nonce != null && message.hasOwnProperty("nonce"))
+                object.nonce = message.nonce;
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = options.enums === String ? $root.protos.MessageBody.Type[message.type] : message.type;
+            return object;
+        };
+
+        /**
+         * Converts this MessageBody to JSON.
+         * @function toJSON
+         * @memberof protos.MessageBody
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MessageBody.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Type enum.
+         * @name protos.MessageBody.Type
+         * @enum {string}
+         * @property {number} Text=0 Text value
+         * @property {number} Image=1 Image value
+         */
+        MessageBody.Type = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "Text"] = 0;
+            values[valuesById[1] = "Image"] = 1;
+            return values;
+        })();
+
+        return MessageBody;
+    })();
+
+    protos.MessagesContainer = (function() {
+
+        /**
+         * Properties of a MessagesContainer.
+         * @memberof protos
+         * @interface IMessagesContainer
+         * @property {Array.<protos.IMessageBody>|null} [messages] MessagesContainer messages
+         */
+
+        /**
+         * Constructs a new MessagesContainer.
+         * @memberof protos
+         * @classdesc Represents a MessagesContainer.
+         * @implements IMessagesContainer
+         * @constructor
+         * @param {protos.IMessagesContainer=} [properties] Properties to set
+         */
+        function MessagesContainer(properties) {
+            this.messages = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MessagesContainer messages.
+         * @member {Array.<protos.IMessageBody>} messages
+         * @memberof protos.MessagesContainer
+         * @instance
+         */
+        MessagesContainer.prototype.messages = $util.emptyArray;
+
+        /**
+         * Creates a new MessagesContainer instance using the specified properties.
+         * @function create
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {protos.IMessagesContainer=} [properties] Properties to set
+         * @returns {protos.MessagesContainer} MessagesContainer instance
+         */
+        MessagesContainer.create = function create(properties) {
+            return new MessagesContainer(properties);
+        };
+
+        /**
+         * Encodes the specified MessagesContainer message. Does not implicitly {@link protos.MessagesContainer.verify|verify} messages.
+         * @function encode
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {protos.IMessagesContainer} message MessagesContainer message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessagesContainer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.messages != null && message.messages.length)
+                for (var i = 0; i < message.messages.length; ++i)
+                    $root.protos.MessageBody.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MessagesContainer message, length delimited. Does not implicitly {@link protos.MessagesContainer.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {protos.IMessagesContainer} message MessagesContainer message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessagesContainer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MessagesContainer message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.MessagesContainer} MessagesContainer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessagesContainer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.MessagesContainer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.messages && message.messages.length))
+                        message.messages = [];
+                    message.messages.push($root.protos.MessageBody.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MessagesContainer message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.MessagesContainer} MessagesContainer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessagesContainer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MessagesContainer message.
+         * @function verify
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MessagesContainer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.messages != null && message.hasOwnProperty("messages")) {
+                if (!Array.isArray(message.messages))
+                    return "messages: array expected";
+                for (var i = 0; i < message.messages.length; ++i) {
+                    var error = $root.protos.MessageBody.verify(message.messages[i]);
+                    if (error)
+                        return "messages." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a MessagesContainer message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.MessagesContainer} MessagesContainer
+         */
+        MessagesContainer.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.MessagesContainer)
+                return object;
+            var message = new $root.protos.MessagesContainer();
+            if (object.messages) {
+                if (!Array.isArray(object.messages))
+                    throw TypeError(".protos.MessagesContainer.messages: array expected");
+                message.messages = [];
+                for (var i = 0; i < object.messages.length; ++i) {
+                    if (typeof object.messages[i] !== "object")
+                        throw TypeError(".protos.MessagesContainer.messages: object expected");
+                    message.messages[i] = $root.protos.MessageBody.fromObject(object.messages[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MessagesContainer message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.MessagesContainer
+         * @static
+         * @param {protos.MessagesContainer} message MessagesContainer
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MessagesContainer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.messages = [];
+            if (message.messages && message.messages.length) {
+                object.messages = [];
+                for (var j = 0; j < message.messages.length; ++j)
+                    object.messages[j] = $root.protos.MessageBody.toObject(message.messages[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this MessagesContainer to JSON.
+         * @function toJSON
+         * @memberof protos.MessagesContainer
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MessagesContainer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MessagesContainer;
+    })();
+
+    protos.AccountHandshake = (function() {
+
+        /**
+         * Properties of an AccountHandshake.
+         * @memberof protos
+         * @interface IAccountHandshake
+         * @property {Array.<protos.IUserModel>|null} [contacts] AccountHandshake contacts
+         * @property {Array.<protos.IFriendRequest>|null} [friendRequests] AccountHandshake friendRequests
+         * @property {Array.<protos.IMessage>|null} [newMessages] AccountHandshake newMessages
+         * @property {boolean|null} [hasRecoveryKey] AccountHandshake hasRecoveryKey
+         */
+
+        /**
+         * Constructs a new AccountHandshake.
+         * @memberof protos
+         * @classdesc Represents an AccountHandshake.
+         * @implements IAccountHandshake
+         * @constructor
+         * @param {protos.IAccountHandshake=} [properties] Properties to set
+         */
+        function AccountHandshake(properties) {
+            this.contacts = [];
+            this.friendRequests = [];
+            this.newMessages = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AccountHandshake contacts.
+         * @member {Array.<protos.IUserModel>} contacts
+         * @memberof protos.AccountHandshake
+         * @instance
+         */
+        AccountHandshake.prototype.contacts = $util.emptyArray;
+
+        /**
+         * AccountHandshake friendRequests.
+         * @member {Array.<protos.IFriendRequest>} friendRequests
+         * @memberof protos.AccountHandshake
+         * @instance
+         */
+        AccountHandshake.prototype.friendRequests = $util.emptyArray;
+
+        /**
+         * AccountHandshake newMessages.
+         * @member {Array.<protos.IMessage>} newMessages
+         * @memberof protos.AccountHandshake
+         * @instance
+         */
+        AccountHandshake.prototype.newMessages = $util.emptyArray;
+
+        /**
+         * AccountHandshake hasRecoveryKey.
+         * @member {boolean} hasRecoveryKey
+         * @memberof protos.AccountHandshake
+         * @instance
+         */
+        AccountHandshake.prototype.hasRecoveryKey = false;
+
+        /**
+         * Creates a new AccountHandshake instance using the specified properties.
+         * @function create
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {protos.IAccountHandshake=} [properties] Properties to set
+         * @returns {protos.AccountHandshake} AccountHandshake instance
+         */
+        AccountHandshake.create = function create(properties) {
+            return new AccountHandshake(properties);
+        };
+
+        /**
+         * Encodes the specified AccountHandshake message. Does not implicitly {@link protos.AccountHandshake.verify|verify} messages.
+         * @function encode
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {protos.IAccountHandshake} message AccountHandshake message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AccountHandshake.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.contacts != null && message.contacts.length)
+                for (var i = 0; i < message.contacts.length; ++i)
+                    $root.protos.UserModel.encode(message.contacts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.friendRequests != null && message.friendRequests.length)
+                for (var i = 0; i < message.friendRequests.length; ++i)
+                    $root.protos.FriendRequest.encode(message.friendRequests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.newMessages != null && message.newMessages.length)
+                for (var i = 0; i < message.newMessages.length; ++i)
+                    $root.protos.Message.encode(message.newMessages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.hasRecoveryKey);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified AccountHandshake message, length delimited. Does not implicitly {@link protos.AccountHandshake.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {protos.IAccountHandshake} message AccountHandshake message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AccountHandshake.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an AccountHandshake message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.AccountHandshake} AccountHandshake
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AccountHandshake.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.AccountHandshake();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.contacts && message.contacts.length))
+                        message.contacts = [];
+                    message.contacts.push($root.protos.UserModel.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.friendRequests && message.friendRequests.length))
+                        message.friendRequests = [];
+                    message.friendRequests.push($root.protos.FriendRequest.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    if (!(message.newMessages && message.newMessages.length))
+                        message.newMessages = [];
+                    message.newMessages.push($root.protos.Message.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    message.hasRecoveryKey = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an AccountHandshake message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.AccountHandshake} AccountHandshake
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AccountHandshake.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an AccountHandshake message.
+         * @function verify
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        AccountHandshake.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.contacts != null && message.hasOwnProperty("contacts")) {
+                if (!Array.isArray(message.contacts))
+                    return "contacts: array expected";
+                for (var i = 0; i < message.contacts.length; ++i) {
+                    var error = $root.protos.UserModel.verify(message.contacts[i]);
+                    if (error)
+                        return "contacts." + error;
+                }
+            }
+            if (message.friendRequests != null && message.hasOwnProperty("friendRequests")) {
+                if (!Array.isArray(message.friendRequests))
+                    return "friendRequests: array expected";
+                for (var i = 0; i < message.friendRequests.length; ++i) {
+                    var error = $root.protos.FriendRequest.verify(message.friendRequests[i]);
+                    if (error)
+                        return "friendRequests." + error;
+                }
+            }
+            if (message.newMessages != null && message.hasOwnProperty("newMessages")) {
+                if (!Array.isArray(message.newMessages))
+                    return "newMessages: array expected";
+                for (var i = 0; i < message.newMessages.length; ++i) {
+                    var error = $root.protos.Message.verify(message.newMessages[i]);
+                    if (error)
+                        return "newMessages." + error;
+                }
+            }
+            if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
+                if (typeof message.hasRecoveryKey !== "boolean")
+                    return "hasRecoveryKey: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates an AccountHandshake message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.AccountHandshake} AccountHandshake
+         */
+        AccountHandshake.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.AccountHandshake)
+                return object;
+            var message = new $root.protos.AccountHandshake();
+            if (object.contacts) {
+                if (!Array.isArray(object.contacts))
+                    throw TypeError(".protos.AccountHandshake.contacts: array expected");
+                message.contacts = [];
+                for (var i = 0; i < object.contacts.length; ++i) {
+                    if (typeof object.contacts[i] !== "object")
+                        throw TypeError(".protos.AccountHandshake.contacts: object expected");
+                    message.contacts[i] = $root.protos.UserModel.fromObject(object.contacts[i]);
+                }
+            }
+            if (object.friendRequests) {
+                if (!Array.isArray(object.friendRequests))
+                    throw TypeError(".protos.AccountHandshake.friendRequests: array expected");
+                message.friendRequests = [];
+                for (var i = 0; i < object.friendRequests.length; ++i) {
+                    if (typeof object.friendRequests[i] !== "object")
+                        throw TypeError(".protos.AccountHandshake.friendRequests: object expected");
+                    message.friendRequests[i] = $root.protos.FriendRequest.fromObject(object.friendRequests[i]);
+                }
+            }
+            if (object.newMessages) {
+                if (!Array.isArray(object.newMessages))
+                    throw TypeError(".protos.AccountHandshake.newMessages: array expected");
+                message.newMessages = [];
+                for (var i = 0; i < object.newMessages.length; ++i) {
+                    if (typeof object.newMessages[i] !== "object")
+                        throw TypeError(".protos.AccountHandshake.newMessages: object expected");
+                    message.newMessages[i] = $root.protos.Message.fromObject(object.newMessages[i]);
+                }
+            }
+            if (object.hasRecoveryKey != null)
+                message.hasRecoveryKey = Boolean(object.hasRecoveryKey);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an AccountHandshake message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.AccountHandshake
+         * @static
+         * @param {protos.AccountHandshake} message AccountHandshake
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        AccountHandshake.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.contacts = [];
+                object.friendRequests = [];
+                object.newMessages = [];
+            }
+            if (options.defaults)
+                object.hasRecoveryKey = false;
+            if (message.contacts && message.contacts.length) {
+                object.contacts = [];
+                for (var j = 0; j < message.contacts.length; ++j)
+                    object.contacts[j] = $root.protos.UserModel.toObject(message.contacts[j], options);
+            }
+            if (message.friendRequests && message.friendRequests.length) {
+                object.friendRequests = [];
+                for (var j = 0; j < message.friendRequests.length; ++j)
+                    object.friendRequests[j] = $root.protos.FriendRequest.toObject(message.friendRequests[j], options);
+            }
+            if (message.newMessages && message.newMessages.length) {
+                object.newMessages = [];
+                for (var j = 0; j < message.newMessages.length; ++j)
+                    object.newMessages[j] = $root.protos.Message.toObject(message.newMessages[j], options);
+            }
+            if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
+                object.hasRecoveryKey = message.hasRecoveryKey;
+            return object;
+        };
+
+        /**
+         * Converts this AccountHandshake to JSON.
+         * @function toJSON
+         * @memberof protos.AccountHandshake
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        AccountHandshake.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AccountHandshake;
+    })();
+
     protos.ServerResponse = (function() {
 
         /**
