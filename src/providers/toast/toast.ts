@@ -10,12 +10,25 @@ export class ToastProvider {
    *
    * @param msg the message to be shown
    */
-  public error(msg: string) {
+  public error(msg: string, duration = 5000) {
+    this.present(msg, "toast-error", duration);
+  }
+
+  /**
+   * Presents a default toast for a successfully completed action
+   *
+   * @param msg the message to be shown
+   */
+  public success(msg: string, duration = 5000) {
+    this.present(msg, "toast-success", duration);
+  }
+
+  private present(msg: string, cssClass: string, duration: number) {
     this.toastCtrl
       .create({
         message: msg,
-        duration: 5000,
-        cssClass: "toast-error"
+        cssClass,
+        duration
       })
       .present();
   }

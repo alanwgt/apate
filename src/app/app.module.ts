@@ -20,7 +20,13 @@ import { SettingsPage } from "../pages/settings/settings";
 import { ConversationsPage } from "../pages/conversations/conversations";
 import { ConversationPage } from "../pages/conversation/conversation";
 import { ProfilePage } from "../pages/profile/profile";
-import { UserListPage } from "../pages/user-list/user-list";
+import { PhotoViewerPage } from "../pages/photo-viewer/photo-viewer";
+import { CreditsPage } from "../pages/credits/credits";
+import { RecoveryPage } from "../pages/recovery/recovery";
+import { BlockedPage } from "../pages/blocked/blocked";
+import { TrophiesPage } from "../pages/trophies/trophies";
+import { ContactsPage } from "../pages/contacts/contacts";
+import { FriendRequestsPage } from "../pages/friend-requests/friend-requests";
 
 import { CryptoProvider } from "../providers/crypto/crypto";
 import { UserProvider } from "../providers/user/user";
@@ -32,7 +38,8 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { Firebase } from "@ionic-native/firebase";
 import { FcmProvider } from "../providers/fcm/fcm";
-import { ToastProvider } from '../providers/toast/toast';
+import { ToastProvider } from "../providers/toast/toast";
+import { SettingsProvider } from "../providers/settings/settings";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDR5JG9a6ztzVG0RiYUyLbxEHW3MoMcJaY",
@@ -54,11 +61,25 @@ const firebaseConfig = {
     ConversationsPage,
     ConversationPage,
     ProfilePage,
-    UserListPage
+    PhotoViewerPage,
+    CreditsPage,
+    RecoveryPage,
+    BlockedPage,
+    TrophiesPage,
+    ContactsPage,
+    FriendRequestsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      iconMode: "ios",
+      pageTransition: "ios",
+      mode: "ios",
+      backButtonText: "Go Back",
+      modalEnter: "modal-slide-in",
+      modalLeave: "modal-slide-out",
+      tabsPlacement: "bottom"
+    }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule
   ],
@@ -73,7 +94,13 @@ const firebaseConfig = {
     ConversationsPage,
     ConversationPage,
     ProfilePage,
-    UserListPage
+    PhotoViewerPage,
+    CreditsPage,
+    RecoveryPage,
+    BlockedPage,
+    TrophiesPage,
+    ContactsPage,
+    FriendRequestsPage
   ],
   providers: [
     StatusBar,
@@ -92,7 +119,8 @@ const firebaseConfig = {
     NativeStorage,
     RequestProvider,
     CryptoProvider,
-    ToastProvider
+    ToastProvider,
+    SettingsProvider
   ]
 })
 export class AppModule {}

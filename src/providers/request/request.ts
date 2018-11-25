@@ -9,8 +9,15 @@ export type Endpoint =
   | "serverpk"
   | "handshake"
   | "qUser"
-  | "deleteAccount";
-export type Method = "get" | "post" | "delete";
+  | "deleteAccount"
+  | "addUser"
+  | "loadMessage"
+  | "deleteMessage"
+  | "sendMessage"
+  | "storeRecKey"
+  | "acceptFriendRequest"
+  | "denyFriendRequest";
+export type Method = "get" | "post" | "delete" | "put";
 export interface RequestMethod {
   url: string;
   method: Method;
@@ -27,7 +34,7 @@ const _endpoints: { [k in Endpoint]: RequestMethod } = {
   },
   handshake: {
     method: "post",
-    url: "/user/handshake"
+    url: "/handshake"
   },
   qUser: {
     method: "get",
@@ -36,11 +43,40 @@ const _endpoints: { [k in Endpoint]: RequestMethod } = {
   deleteAccount: {
     method: "delete",
     url: "/user"
+  },
+  addUser: {
+    method: "post",
+    url: "/user/"
+  },
+  loadMessage: {
+    method: "get",
+    url: "/message/"
+  },
+  deleteMessage: {
+    method: "delete",
+    url: "/message/"
+  },
+  sendMessage: {
+    method: "post",
+    url: "/message/"
+  },
+  storeRecKey: {
+    method: "post",
+    url: "/recovery"
+  },
+  acceptFriendRequest: {
+    method: "post",
+    url: "/fr/"
+  },
+  denyFriendRequest: {
+    method: "delete",
+    url: "/fr/"
   }
 };
 
 @Injectable()
 export class RequestProvider {
+  // private static readonly BASE_URL = "http://192.168.0.154:8001/";
   private static readonly BASE_URL = "http://192.168.0.4:8001/";
 
   private _axiosInstance: AxiosInstance;
@@ -78,7 +114,9 @@ export class RequestProvider {
       } else if (_endpoints[endpoint].method === "post") {
         request = await this.post(endpoint, dt, appendToURL);
       } else if (_endpoints[endpoint].method === "delete") {
-        request = await this.delete(endpoint, dt);
+        request = await this.delete(endpoint, dt, appendToURL);
+      } else if (_endpoints[endpoint].method === "put") {
+        request = await this.put(endpoint, dt, appendToURL);
       }
       const decoded = naclString.decodeBase64(request.data);
       request.data = protos.ServerResponse.decode(decoded);
@@ -96,15 +134,29 @@ export class RequestProvider {
   /**
    * Performs a GET request on the back-end API with the given data, if any.
    */
-  public async get(endpoint: Endpoint, data?: any, appendToURL?: string) {
+  public async get(
+    endpoint: Endpoint,
+    data?: string | Uint8Array,
+    appendToURL?: string
+  ) {
+    if (data && typeof data !== "string") {
+      data = naclString.encodeBase64(data);
+    }
     const endP = _endpoints[endpoint].url + (appendToURL || "");
-    return this._axiosInstance.get(endP + (data ? qs.stringify(data) : ""));
+    return this._axiosInstance.get(endP + "?d=" + data || "");
   }
 
   /**
    * Performs a POST request on the back-end API with the given data, if any.
    */
-  public async post(endpoint: Endpoint, data?: any, appendToURL?: string) {
+  public async post(
+    endpoint: Endpoint,
+    data?: string | Uint8Array,
+    appendToURL?: string
+  ) {
+    if (data && typeof data !== "string") {
+      data = naclString.encodeBase64(data);
+    }
     const endP = _endpoints[endpoint].url + (appendToURL || "");
     return this._axiosInstance.post(endP, data);
   }
@@ -112,8 +164,55 @@ export class RequestProvider {
   /**
    * Performs a DELETE request on the back-end API with the given data, if any.
    */
-  public async delete(endpoint: Endpoint, data?: any) {
+  public async delete(endpoint: Endpoint, data?: any, appendToURL?: string) {
     const endP = _endpoints[endpoint].url;
-    return this._axiosInstance.delete(endP + "?d=" + data || "");
+    return this._axiosInstance.delete(
+      endP + (appendToURL || "") + ("?d=" + data || "")
+    );
+  }
+
+  /**
+   * Performs a PUT request on the back-end API with the given data, if any.
+   */
+  public async put(
+    endpoint: Endpoint,
+    data?: string | Uint8Array,
+    appendToURL?: string
+  ) {
+    if (data && typeof data !== "string") {
+      data = naclString.encodeBase64(data);
+    }
+    const endP = _endpoints[endpoint].url + (appendToURL || "");
+    return this._axiosInstance.put(endP, data);
+  }
+
+  /**
+   * Marshals an string into a proto
+   *
+   * @param p Base64 encoded proto
+   * @param protoModel Proto model name to be marshalled
+   */
+  public openProto<T>(p: string, protoModel: string) {
+    const decoded = naclString.decodeBase64(p);
+    const m = protos[protoModel].decode(decoded);
+    return <T>m;
+  }
+
+  /**
+   * parses any error that can be sent by the server and returns an error message
+   * @param err
+   */
+  public parseError(err: any): string {
+    if (err.response && err.response.data) {
+      const decoded = naclString.decodeBase64(err.response.data);
+      return protos.ServerResponse.decode(decoded).message;
+    }
+    if (err.message) {
+      return err.message;
+    }
+    if (typeof err === "string") {
+      return err;
+    }
+    return err.toString();
   }
 }
