@@ -1,0 +1,16 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Contacts</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <button *ngFor="let c of contacts" ion-item (click)="openProfile(c.username)">
+      {{ c.username }}
+    </button>
+  </ion-list>
+</ion-content>

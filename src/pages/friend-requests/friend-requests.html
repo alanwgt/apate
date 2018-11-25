@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Friend Requests</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let fr of friendRequests" (click)="openModal(fr.username)">
+      {{ fr.username }}
+    </button>
+  </ion-list>
+
+</ion-content>

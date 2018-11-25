@@ -1,65 +1,44 @@
-<!--
-  Generated template for the ConversationsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <!-- <ion-title>conversations</ion-title> -->
-    <div class="searchbar">
-      <ion-searchbar
-          animated="true"
-          autocomplete="true"
-          placeholder="filter contacts">
-      </ion-searchbar>
-      <button class="z-depth-2" (click)="openConversations()">
+    <ion-title *ngIf="!isSearchBarOpen">Conversations</ion-title>
+    <ion-searchbar
+        *ngIf="isSearchBarOpen"
+        animated="false"
+        placeholder="filter contacts"
+        showCancelButton="true"
+        type="email"
+        (ionCancel)="isSearchBarOpen=false;setContacts()"
+        (ionInput)="filter($event)"
+      
+        color="dark">
+    </ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isSearchBarOpen" (click)="isSearchBarOpen=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <button class="z-depth-2" (click)="openConversations()">
         <ion-badge class="a-badge" style="background: #212121 !important">
           <ion-icon name="add"></ion-icon>
         </ion-badge>
         <ion-icon name="text"></ion-icon>
-      </button>
-    </div>
+      </button> -->
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
 
-    <button ion-item class="conversation" (click)="openConversation('user399', true)">
-      user399
-      <ion-badge item-end>23s</ion-badge>
-      <ion-icon name="cube" item-end></ion-icon>
-    </button>
-    
-    <button ion-item class="conversation" (click)="openConversation('user13', true)">
-      user13
-      <ion-badge item-end>2m</ion-badge>
-      <ion-icon name="cube" item-end></ion-icon>
+    <button *ngFor="let c of contacts" ion-item class="conversation" (click)="openConversation(c.username)">
+      {{ c.username }}
+      <!-- <ion-badge item-end>5h</ion-badge> -->
+      <ion-icon name="{{ getConversationIcon(c.username) }}" item-end></ion-icon>
     </button>
 
-    <button ion-item class="conversation" (click)="openConversation('user1', true)">
-      user1
-      <ion-badge item-end>5h</ion-badge>
-      <ion-icon name="cube" item-end></ion-icon>
-    </button>
-
-    <button ion-item class="conversation" (click)="openConversation('user23')">
-      user23
-      <ion-badge item-end>1w</ion-badge>
-      <ion-icon name="ios-cube-outline" item-end></ion-icon>
-    </button>
-    
-    <button ion-item class="conversation" (click)="openConversation('user65')">
-      user65
-      <ion-badge item-end>3w</ion-badge>
-      <ion-icon name="ios-cube-outline" item-end></ion-icon>
-    </button>
-    
   </ion-list>
 
 </ion-content>

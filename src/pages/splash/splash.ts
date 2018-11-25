@@ -19,6 +19,8 @@ import naclString from "tweetnacl-util";
 import Funnies from "funnies";
 import { protos } from "../../proto/bundle";
 import { RequestProvider } from "../../providers/request/request";
+import { AxiosResponse } from "axios";
+import { SettingsProvider } from "../../providers/settings/settings";
 
 @IonicPage()
 @Component({
@@ -47,7 +49,8 @@ export class SplashPage {
     private network: NetworkProvider,
     private userProvider: UserProvider,
     private platform: Platform,
-    private request: RequestProvider
+    private request: RequestProvider,
+    private settings: SettingsProvider
   ) {
     this.funnies = new Funnies();
   }
@@ -70,7 +73,14 @@ export class SplashPage {
         return;
       }
 
-      await this.doHandshake();
+      const [userData, error] = await this.doHandshake();
+
+      if (error) {
+        this.presentError(error);
+        return;
+      }
+
+      this.settings.initDataFromServer(userData);
     } catch (err) {
       console.error(err);
 
@@ -78,22 +88,7 @@ export class SplashPage {
         err = "It seems that our server is offline. Please, try again later.";
       }
 
-      this.alertCtrl
-        .create({
-          title: "Whoops! :(",
-          subTitle: err,
-          message: "The app will now exit.",
-          buttons: [
-            {
-              text: "ok",
-              handler: () => {
-                this.platform.exitApp();
-              }
-            }
-          ],
-          enableBackdropDismiss: false
-        })
-        .present();
+      this.presentError(new Error(err));
       return;
     }
 
@@ -167,32 +162,53 @@ export class SplashPage {
   }
 
   /**
-   * doHandshake will tell the server that our keys are still valid.
-   * if the handshake fails, probably the user's public key was updated(?)
+   * doHandshake will tell the server that our keys are still valid. And if they are,
+   * the server will return all the user's data
    *
    * @private
-   * @returns {Promise<boolean>}
+   * @returns {Promise<[protos.AccountHandshake, Error]>}
    * @memberof AuthenticationPage
    */
-  public async doHandshake(): Promise<void> {
-    const k = "handshake:" + this.userProvider.username;
-    const nonce = this.crypto.genNonce();
-    const encrypted = this.crypto.createServerBox(k, nonce);
-    const message = protos.DeviceRequest.create({
-      nonce: naclString.encodeBase64(nonce),
-      paylod: naclString.encodeBase64(encrypted),
-      username: this.userProvider.username
-    });
-    const buffer = protos.DeviceRequest.encode(message).finish();
-    const response = await this.request.request("handshake", buffer);
+  public async doHandshake(): Promise<[protos.AccountHandshake, Error]> {
+    const encryptedMessage = this.crypto.genBoxForServer(
+      this.userProvider.username
+    );
 
-    if (
-      response.data.status === protos.ServerResponse.Status.Ok &&
-      response.data.message === k
-    ) {
-      return;
+    let proto: protos.AccountHandshake;
+
+    try {
+      const response = await this.request.post("handshake", encryptedMessage);
+      proto = this.request.openProto<protos.AccountHandshake>(
+        response.data,
+        "AccountHandshake"
+      );
+    } catch (err) {
+      return [undefined, err];
     }
 
-    throw new Error("Handshake failed!");
+    return [proto, undefined];
+  }
+
+  /**
+   * Auxiliary method to present a default error to the user
+   * @param err
+   */
+  private presentError(err: Error) {
+    this.alertCtrl
+      .create({
+        title: "Whoops! :(",
+        subTitle: err.message,
+        message: "The app will now exit.",
+        buttons: [
+          {
+            text: "ok",
+            handler: () => {
+              this.platform.exitApp();
+            }
+          }
+        ],
+        enableBackdropDismiss: false
+      })
+      .present();
   }
 }

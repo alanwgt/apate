@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recovery</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngIf="!hasRecoveryKey">
+      <p ion-text>To be able to recover your account, you must generate four passphrases and safely store them. Once they are generated, they can't be changed. If you loose this device, they are the <span ion-text color="danger">ONLY</span> way to restore your old account.</p>
+      <br>
+    
+      <div *ngIf="passphrases">
+        <ul>
+          <li *ngFor="let p of passphrases" class="passphrase">
+            {{p}}
+          </li>
+        </ul>
+        <p ion-text color="danger">Please, write these passphrases in a secure location, they are the only way to recover your account.</p>
+      </div>
+    
+      <button *ngIf="!passphrases" ion-button round full color="secondary" (click)="generatePassword()">Generate passphrases</button>
+  </div>
+
+  <div *ngIf="hasRecoveryKey">
+    <p ion-text>Your account is safe, the passphrases were already generated.</p>
+  </div>
+
+</ion-content>

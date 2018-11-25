@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { Component } from "@angular/core";
+import { NavController, AlertController } from "ionic-angular";
 import { CameraPreview } from "@ionic-native/camera-preview";
 import { Platform } from "ionic-angular";
 import { SpinnerDialog } from "@ionic-native/spinner-dialog";
@@ -8,7 +8,8 @@ import { PhotoPreviewPage } from "../photo-preview/photo-preview";
 import { ConversationsPage } from "../conversations/conversations";
 import { SettingsPage } from "../settings/settings";
 import { UserProvider, UserQueryResult } from "../../providers/user/user";
-import { UserListPage } from "../user-list/user-list";
+import { SettingsProvider } from "../../providers/settings/settings";
+import { ProfilePage } from "../profile/profile";
 
 @Component({
   selector: "page-home",
@@ -16,14 +17,18 @@ import { UserListPage } from "../user-list/user-list";
 })
 export class HomePage {
   private cameraPreview: CameraPreview;
-  private userQPromise: Promise<UserQueryResult[]>;
-  private canQUser: boolean = true;
+  private newMessagesCount = 0;
+  private friendRequests = 0;
+  private userQueryResult: UserQueryResult[] = [];
+  private cameraView = "front";
 
   constructor(
     public navCtrl: NavController,
     private platform: Platform,
     private spinnerDialog: SpinnerDialog,
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private settings: SettingsProvider,
+    private alertCtrl: AlertController
   ) {}
 
   /**
@@ -44,8 +49,13 @@ export class HomePage {
       y: 0,
       width: this.platform.width(),
       height: this.platform.height(),
-      camera: "front"
+      camera: this.cameraView
     });
+  }
+
+  reverseCamera() {
+    this.cameraView = this.cameraView === "front" ? "rear" : "front";
+    this.cameraPreview.switchCamera();
   }
 
   refresh() {
@@ -56,13 +66,12 @@ export class HomePage {
     this.navCtrl.push(ConversationsPage);
   }
 
+  openProfile(username: string) {
+    this.navCtrl.push(ProfilePage, { username });
+  }
+
   takePicture() {
     this.spinnerDialog.show();
-
-    if (!this.cameraPreview) {
-      // TODO: show message error
-      return;
-    }
 
     this.cameraPreview
       .takePicture({
@@ -80,7 +89,9 @@ export class HomePage {
       );
   }
 
-  openTrophies() {}
+  clear() {
+    this.userQueryResult = [];
+  }
 
   openSettings() {
     this.navCtrl.push(SettingsPage);
@@ -107,15 +118,7 @@ export class HomePage {
 
   /* NAVIGATION LIFECYCLE EVENTS */
 
-  ionViewDidEnter() {
-    const input = <HTMLInputElement>(
-      document.querySelector(".search-wrapper input")
-    );
-    // console.log(input);
-    input.addEventListener("change", function(e) {
-      // console.log(this.value);
-    });
-  }
+  ionViewDidEnter() {}
 
   /**
    * userQ queries the server for the username
@@ -123,30 +126,15 @@ export class HomePage {
    * @param {string} username
    * @memberof HomePage
    */
-  public async userQ(username: string) {
-    if (username.length < 4 || !this.canQUser || this.userQPromise) {
+  public async userQ(ev: any) {
+    const val = ev.target.value;
+    if (!val || val.trim().length === 0 || val.length < 4) {
       return;
     }
 
     this.spinnerDialog.show();
-    this.canQUser = false;
-    this.userQPromise = this.userProvider.queryUsername(username);
-    const qRes = await this.userQPromise;
+    this.userQueryResult = await this.userProvider.queryUsername(val);
     this.spinnerDialog.hide();
-    this.userQPromise = undefined;
-
-    if (qRes.length > 0) {
-      this.canQUser = true;
-      this.navCtrl.push(UserListPage, {
-        userFilter: username,
-        users: qRes
-      });
-      return;
-    }
-
-    setTimeout(() => {
-      this.canQUser = true;
-    }, 1000);
   }
 
   ionViewWillLeave() {
@@ -160,11 +148,8 @@ export class HomePage {
     } catch (_) {}
 
     this.setBackgroundColor("transparent");
-
-    // if (this.cameraPreview) {
-    //   return;
-    // }
-
     this.setupCameraPreview();
+    this.newMessagesCount = this.settings.getNumberOfUnopenedConversations();
+    this.friendRequests = this.settings.getFriendRequests().length;
   }
 }

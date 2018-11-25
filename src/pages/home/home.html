@@ -1,31 +1,61 @@
 <ion-content>
 
-  <div class="search-wrapper">
+  <!-- <div class="search-wrapper">
     <ion-item id="search">
       <ion-label><ion-icon name="search"></ion-icon></ion-label>
       <ion-input type="email" clearInput placeholder="search for user..." (keyup)="userQ($event.target.value)"></ion-input>
     </ion-item>
     <button (click)="openSettings()">
+      <ion-badge *ngIf="friendRequests > 0" class="a-badge">{{ friendRequests }}</ion-badge>
       <ion-icon name="settings"></ion-icon>
     </button>
+  </div> -->
+
+  <ion-fab class="mfab reverse-camera">
+    <button ion-fab large (click)="reverseCamera()">
+      <ion-icon name="reverse-camera-outline"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!-- <ion-fab class="mfab wand">
+    <button ion-fab large (click)="applyEffect()">
+      <ion-icon name="color-wand-outline"></ion-icon>
+    </button>
+  </ion-fab>
+   -->
+
+  <div class="searchbar">
+    <ion-searchbar type="email" showCancelButton="false" placeholder="search for username..." (ionInput)="userQ($event)"
+      (ionClear)="clear()">
+    </ion-searchbar>
   </div>
-  
+
+  <div *ngIf="userQueryResult.length > 0" class="q-result">
+    <ion-list>
+      <button ion-item *ngFor="let r of userQueryResult" (click)="openProfile(r.Username)">
+        <ion-icon name="contact" item-start></ion-icon>
+        {{ r.Username }}
+      </button>
+    </ion-list>
+  </div>
+
   <div class="footer">
- 
+
     <button class="footer-btn z-depth-3" (click)="openConversations()">
-      <ion-badge class="a-badge">3</ion-badge>
-      <ion-icon name="text"></ion-icon>
+      <ion-badge *ngIf="newMessagesCount > 0" class="a-badge">{{ newMessagesCount }}</ion-badge>
+      <ion-icon name="ios-text"></ion-icon>
     </button>
 
     <button class="footer-btn footer-btn__middle z-depth-5" (click)="takePicture()">
-      <ion-icon name="aperture"></ion-icon>
+      <ion-icon name="ios-aperture-outline"></ion-icon>
       <!-- <div id="ionball" class="z-depth-3"></div> -->
     </button>
 
-    <button class="footer-btn z-depth-3" (click)="openTrophies()">
-      <ion-icon name="trophy"></ion-icon>
+    <button class="footer-btn z-depth-3" (click)="openSettings()">
+      <ion-badge *ngIf="friendRequests > 0" class="a-badge">{{ friendRequests }}</ion-badge>
+      <ion-icon name="ios-settings"></ion-icon>
     </button>
-    
+
   </div>
 
 </ion-content>

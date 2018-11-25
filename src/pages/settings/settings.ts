@@ -12,12 +12,22 @@ import { UserProvider } from "../../providers/user/user";
 import { AxiosResponse } from "axios";
 import { ToastProvider } from "../../providers/toast/toast";
 
+import { CreditsPage } from "../../pages/credits/credits";
+import { RecoveryPage } from "../../pages/recovery/recovery";
+import { BlockedPage } from "../../pages/blocked/blocked";
+import { TrophiesPage } from "../../pages/trophies/trophies";
+import { ContactsPage } from "../../pages/contacts/contacts";
+import { SettingsProvider } from "../../providers/settings/settings";
+import { FriendRequestsPage } from "../friend-requests/friend-requests";
+
 @IonicPage()
 @Component({
   selector: "page-settings",
   templateUrl: "settings.html"
 })
 export class SettingsPage {
+  private nFriendRequests = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -25,8 +35,33 @@ export class SettingsPage {
     private crypto: CryptoProvider,
     private user: UserProvider,
     private toast: ToastProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private settings: SettingsProvider
   ) {}
+
+  public friendRequests() {
+    this.navCtrl.push(FriendRequestsPage);
+  }
+
+  public credits() {
+    this.navCtrl.push(CreditsPage);
+  }
+
+  public recovery() {
+    this.navCtrl.push(RecoveryPage);
+  }
+
+  public blocked() {
+    this.navCtrl.push(BlockedPage);
+  }
+
+  public trophies() {
+    this.navCtrl.push(TrophiesPage);
+  }
+
+  public contacts() {
+    this.navCtrl.push(ContactsPage);
+  }
 
   /**
    * Called when the user clicks on "delete account" action.
@@ -59,7 +94,7 @@ export class SettingsPage {
    * the user is redirected to SplashPage
    */
   private async doDelete() {
-    const message = this.crypto.genBoxForServer("", this.user.username);
+    const message = this.crypto.genBoxForServer(this.user.username);
     let res: AxiosResponse<protos.ServerResponse>;
 
     try {
@@ -79,5 +114,9 @@ export class SettingsPage {
       );
       return;
     }
+  }
+
+  ionViewWillEnter() {
+    this.nFriendRequests = this.settings.getFriendRequests().length || 0;
   }
 }

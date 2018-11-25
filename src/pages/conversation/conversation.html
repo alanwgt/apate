@@ -1,13 +1,7 @@
-<!--
-  Generated template for the ConversationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title mode="ios">
+    <ion-title>
       <button (click)="openProfile()" icon-end>{{ username }}</button>
     </ion-title>
   </ion-navbar>
@@ -17,8 +11,21 @@
 
 <ion-content>
 
-  <div *ngIf="hasNewMessage" class="messages">
+  <div class="messages">
 
+    <div *ngFor="let msg of messages" class="message-container">
+
+      <p *ngIf="!hasImage(msg)" class="{{ msg.cssClass }}">{{ msg.plain }}
+        <span class="timestamp">{{ getElapsedTime(msg.timestamp) }}</span>
+      </p>
+
+      <p *ngIf="hasImage(msg)" class="{{ msg.cssClass }}">
+        <img src="/assets/imgs/ghost.svg" alt="" (click)="openImage(msg)">
+        <span class="timestamp timestamp-img">{{ getElapsedTime(msg.timestamp) }}</span>
+      </p>
+
+    </div>
+<!--     
     <div class="message-container">
       <p class="his">Lorem ipsum dolor sit amet
         <span class="timestamp">2h</span>
@@ -37,15 +44,15 @@
           <ion-icon name="close"></ion-icon>
         </button>
       <img class="mine" src="/assets/imgs/ionball.png" alt="">
-    </div>
+    </div> -->
 
   </div>
 
   <div class="input z-depth-5">
     <ion-item>
-      <ion-input placeholder="send a message..."></ion-input>
-      <button item-end ion-fab mini>
-        <ion-icon name="camera"></ion-icon>
+      <ion-input placeholder="send a message..." id="messageBody" (ionChange)="onChange($event)" [(ngModel)]="messageBody" (keyup.enter)="handleSendMessage()"></ion-input>
+      <button item-end ion-fab mini (click)="handleSendMessage()">
+        <ion-icon name="{{sendMessageIcon}}"></ion-icon>
       </button>
     </ion-item>
   </div>

@@ -1,5 +1,23 @@
 page-home {
 
+  .mfab {
+    right: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    .fab-ios {
+      background: none !important;
+    }
+  }
+
+  .reverse-camera {
+    top: 50px;
+  }
+
+  .wand {
+    top: 115px;
+  }
+
   button {
     background: none;
   }
@@ -53,15 +71,41 @@ page-home {
     align-items: center;
 
     ion-icon {
-      font-size: 24px;
+      font-size: 30px;
     }
   }
 
   .footer-btn__middle {
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       ion-icon {
           font-size: 72px;
       }
+  }
+
+  .q-result {
+    padding: 0 8px;
+    // overflow-y: auto;
+
+    max-height: 250px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+
+    ion-list {
+      margin-bottom: 8px;
+    }
+
+    button {
+      // border-radius: 5px;
+      margin: 1px auto;
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      &:last-child {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
   }
 }
