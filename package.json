@@ -54,6 +54,7 @@
     "funnies": "^2.0.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "niceware": "^1.0.5",
     "protobufjs": "^6.8.8",
     "qs": "^6.5.2",
     "rxjs": "^6.3.3",
