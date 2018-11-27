@@ -15,7 +15,6 @@ import { ToastProvider } from "../../providers/toast/toast";
 import { CreditsPage } from "../../pages/credits/credits";
 import { RecoveryPage } from "../../pages/recovery/recovery";
 import { BlockedPage } from "../../pages/blocked/blocked";
-import { TrophiesPage } from "../../pages/trophies/trophies";
 import { ContactsPage } from "../../pages/contacts/contacts";
 import { SettingsProvider } from "../../providers/settings/settings";
 import { FriendRequestsPage } from "../friend-requests/friend-requests";
@@ -53,10 +52,6 @@ export class SettingsPage {
 
   public blocked() {
     this.navCtrl.push(BlockedPage);
-  }
-
-  public trophies() {
-    this.navCtrl.push(TrophiesPage);
   }
 
   public contacts() {

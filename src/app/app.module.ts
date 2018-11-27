@@ -24,7 +24,6 @@ import { PhotoViewerPage } from "../pages/photo-viewer/photo-viewer";
 import { CreditsPage } from "../pages/credits/credits";
 import { RecoveryPage } from "../pages/recovery/recovery";
 import { BlockedPage } from "../pages/blocked/blocked";
-import { TrophiesPage } from "../pages/trophies/trophies";
 import { ContactsPage } from "../pages/contacts/contacts";
 import { FriendRequestsPage } from "../pages/friend-requests/friend-requests";
 
@@ -65,7 +64,6 @@ const firebaseConfig = {
     CreditsPage,
     RecoveryPage,
     BlockedPage,
-    TrophiesPage,
     ContactsPage,
     FriendRequestsPage
   ],
@@ -98,7 +96,6 @@ const firebaseConfig = {
     CreditsPage,
     RecoveryPage,
     BlockedPage,
-    TrophiesPage,
     ContactsPage,
     FriendRequestsPage
   ],
