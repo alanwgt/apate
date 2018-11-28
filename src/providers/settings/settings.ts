@@ -82,6 +82,13 @@ export class SettingsProvider {
   }
 
   /**
+   * Adds a friend request to the list
+   */
+  public addFriendRequest(fr: protos.IFriendRequest) {
+    this.friendRequests.push(fr);
+  }
+
+  /**
    * Returns true if an user was previously blocked and is in the blocked list
    * @param un
    */
@@ -142,7 +149,7 @@ export class SettingsProvider {
   }
 
   /**
-   * removes the messages from de dictionary. Use this whe the user reads the messages from any user
+   * removes the messages from the dictionary. Use this when the user reads the messages from any user
    * @param from the user that sent the messages
    */
   public removeMessages(from: string) {
@@ -199,5 +206,44 @@ export class SettingsProvider {
       username: fr.username,
       pubK: fr.pubK
     });
+  }
+
+  /**
+   * Deletes a message from the list
+   * @param from
+   * @param mId
+   */
+  public removeMessage(from: string, mId: string) {
+    const mIdC = parseInt(mId);
+    for (let i = 0; i < this.mappedMessages[from].length; i++) {
+      if (this.mappedMessages[from][i].messageId == mIdC) {
+        this.mappedMessages[from].splice(i, 1);
+      }
+    }
+    for (let i = 0; i < this.newMessages.length; i++) {
+      if (this.newMessages[i].messageId == mIdC) {
+        this.newMessages.splice(i, 1);
+      }
+    }
+  }
+
+  /**
+   * Adds a message to the list
+   * @param from
+   * @param mId
+   */
+  public addMessage(from: string, mId: string) {
+    const m: protos.IMessage = {
+      deletable: false,
+      from,
+      messageId: parseInt(mId),
+      to: this.userProvider.username,
+      timestamp: Math.round(new Date().getTime() / 1000)
+    };
+    this.newMessages.push(m);
+    if (!this.mappedMessages[from]) {
+      this.mappedMessages[from] = [];
+    }
+    this.mappedMessages[from].push(m);
   }
 }

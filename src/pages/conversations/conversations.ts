@@ -4,6 +4,10 @@ import { IonicPage, NavController } from "ionic-angular";
 import { ConversationPage } from "../conversation/conversation";
 import { SettingsProvider } from "../../providers/settings/settings";
 import { protos } from "../../proto/bundle";
+import { RequestProvider } from "../../providers/request/request";
+import { CryptoProvider } from "../../providers/crypto/crypto";
+import { UserProvider } from "../../providers/user/user";
+import { ToastProvider } from "../../providers/toast/toast";
 
 /**
  * Generated class for the ConversationsPage page.
@@ -23,7 +27,11 @@ export class ConversationsPage {
 
   constructor(
     public navCtrl: NavController,
-    private settings: SettingsProvider
+    private settings: SettingsProvider,
+    private req: RequestProvider,
+    private crypto: CryptoProvider,
+    private userProvider: UserProvider,
+    private toast: ToastProvider
   ) {
     this.setContacts();
   }
@@ -51,6 +59,19 @@ export class ConversationsPage {
     this.contacts = this.contacts.filter(v => {
       return v.username.toLowerCase().indexOf(val.toLowerCase()) > -1;
     });
+  }
+
+  async doRefresh(refresher) {
+    const message = this.crypto.genBoxForServer(this.userProvider.username);
+    try {
+      const res = await this.req.get("refreshMessages", message);
+      const msgs = this.req.openProto<protos.MessageRefresh>(
+        res.data,
+        "MessageRefresh"
+      );
+    } catch (err) {
+      this.toast.error(this.req.parseError(err));
+    }
   }
 
   private setContacts() {

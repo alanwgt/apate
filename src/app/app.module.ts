@@ -10,6 +10,7 @@ import { SecureStorage } from "@ionic-native/secure-storage";
 import { AndroidPermissions } from "@ionic-native/android-permissions";
 import { Network } from "@ionic-native/network";
 import { NativeStorage } from "@ionic-native/native-storage";
+import { FCM } from "@ionic-native/fcm";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -26,6 +27,7 @@ import { RecoveryPage } from "../pages/recovery/recovery";
 import { BlockedPage } from "../pages/blocked/blocked";
 import { ContactsPage } from "../pages/contacts/contacts";
 import { FriendRequestsPage } from "../pages/friend-requests/friend-requests";
+import { RecoverAccountPage } from "../pages/recover-account/recover-account";
 
 import { CryptoProvider } from "../providers/crypto/crypto";
 import { UserProvider } from "../providers/user/user";
@@ -33,9 +35,6 @@ import { ContactsProvider } from "../providers/contacts/contacts";
 import { NetworkProvider } from "../providers/network/network";
 import { RequestProvider } from "../providers/request/request";
 
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { Firebase } from "@ionic-native/firebase";
 import { FcmProvider } from "../providers/fcm/fcm";
 import { ToastProvider } from "../providers/toast/toast";
 import { SettingsProvider } from "../providers/settings/settings";
@@ -65,7 +64,8 @@ const firebaseConfig = {
     RecoveryPage,
     BlockedPage,
     ContactsPage,
-    FriendRequestsPage
+    FriendRequestsPage,
+    RecoverAccountPage
   ],
   imports: [
     BrowserModule,
@@ -77,9 +77,7 @@ const firebaseConfig = {
       modalEnter: "modal-slide-in",
       modalLeave: "modal-slide-out",
       tabsPlacement: "bottom"
-    }),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -97,13 +95,14 @@ const firebaseConfig = {
     RecoveryPage,
     BlockedPage,
     ContactsPage,
-    FriendRequestsPage
+    FriendRequestsPage,
+    RecoverAccountPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    Firebase,
+    FCM,
     FcmProvider,
     CameraPreview,
     SpinnerDialog,

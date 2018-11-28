@@ -10,6 +10,7 @@ import { protos } from "../../proto/bundle";
 import { UserProvider } from "../../providers/user/user";
 import { AxiosResponse } from "axios";
 import { FcmProvider } from "../../providers/fcm/fcm";
+import { RecoverAccountPage } from "../recover-account/recover-account";
 
 /**
  * Generated class for the AuthenticationPage page.
@@ -119,6 +120,10 @@ export class AuthenticationPage {
     } else {
       // TODO!
     }
+  }
+
+  recover() {
+    this.navCtrl.push(RecoverAccountPage);
   }
 
   /**

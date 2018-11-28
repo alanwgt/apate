@@ -1513,6 +1513,214 @@ $root.protos = (function() {
         return MessagesContainer;
     })();
 
+    protos.MessageRefresh = (function() {
+
+        /**
+         * Properties of a MessageRefresh.
+         * @memberof protos
+         * @interface IMessageRefresh
+         * @property {Array.<protos.IMessage>|null} [messages] MessageRefresh messages
+         */
+
+        /**
+         * Constructs a new MessageRefresh.
+         * @memberof protos
+         * @classdesc Represents a MessageRefresh.
+         * @implements IMessageRefresh
+         * @constructor
+         * @param {protos.IMessageRefresh=} [properties] Properties to set
+         */
+        function MessageRefresh(properties) {
+            this.messages = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MessageRefresh messages.
+         * @member {Array.<protos.IMessage>} messages
+         * @memberof protos.MessageRefresh
+         * @instance
+         */
+        MessageRefresh.prototype.messages = $util.emptyArray;
+
+        /**
+         * Creates a new MessageRefresh instance using the specified properties.
+         * @function create
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {protos.IMessageRefresh=} [properties] Properties to set
+         * @returns {protos.MessageRefresh} MessageRefresh instance
+         */
+        MessageRefresh.create = function create(properties) {
+            return new MessageRefresh(properties);
+        };
+
+        /**
+         * Encodes the specified MessageRefresh message. Does not implicitly {@link protos.MessageRefresh.verify|verify} messages.
+         * @function encode
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {protos.IMessageRefresh} message MessageRefresh message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessageRefresh.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.messages != null && message.messages.length)
+                for (var i = 0; i < message.messages.length; ++i)
+                    $root.protos.Message.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MessageRefresh message, length delimited. Does not implicitly {@link protos.MessageRefresh.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {protos.IMessageRefresh} message MessageRefresh message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MessageRefresh.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MessageRefresh message from the specified reader or buffer.
+         * @function decode
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {protos.MessageRefresh} MessageRefresh
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessageRefresh.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.protos.MessageRefresh();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.messages && message.messages.length))
+                        message.messages = [];
+                    message.messages.push($root.protos.Message.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MessageRefresh message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {protos.MessageRefresh} MessageRefresh
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MessageRefresh.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MessageRefresh message.
+         * @function verify
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MessageRefresh.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.messages != null && message.hasOwnProperty("messages")) {
+                if (!Array.isArray(message.messages))
+                    return "messages: array expected";
+                for (var i = 0; i < message.messages.length; ++i) {
+                    var error = $root.protos.Message.verify(message.messages[i]);
+                    if (error)
+                        return "messages." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a MessageRefresh message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {protos.MessageRefresh} MessageRefresh
+         */
+        MessageRefresh.fromObject = function fromObject(object) {
+            if (object instanceof $root.protos.MessageRefresh)
+                return object;
+            var message = new $root.protos.MessageRefresh();
+            if (object.messages) {
+                if (!Array.isArray(object.messages))
+                    throw TypeError(".protos.MessageRefresh.messages: array expected");
+                message.messages = [];
+                for (var i = 0; i < object.messages.length; ++i) {
+                    if (typeof object.messages[i] !== "object")
+                        throw TypeError(".protos.MessageRefresh.messages: object expected");
+                    message.messages[i] = $root.protos.Message.fromObject(object.messages[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MessageRefresh message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof protos.MessageRefresh
+         * @static
+         * @param {protos.MessageRefresh} message MessageRefresh
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MessageRefresh.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.messages = [];
+            if (message.messages && message.messages.length) {
+                object.messages = [];
+                for (var j = 0; j < message.messages.length; ++j)
+                    object.messages[j] = $root.protos.Message.toObject(message.messages[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this MessageRefresh to JSON.
+         * @function toJSON
+         * @memberof protos.MessageRefresh
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MessageRefresh.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MessageRefresh;
+    })();
+
     protos.AccountHandshake = (function() {
 
         /**

@@ -2,16 +2,8 @@
 
   <ion-navbar>
     <ion-title *ngIf="!isSearchBarOpen">Conversations</ion-title>
-    <ion-searchbar
-        *ngIf="isSearchBarOpen"
-        animated="false"
-        placeholder="filter contacts"
-        showCancelButton="true"
-        type="email"
-        (ionCancel)="isSearchBarOpen=false;setContacts()"
-        (ionInput)="filter($event)"
-      
-        color="dark">
+    <ion-searchbar *ngIf="isSearchBarOpen" animated="false" placeholder="filter contacts" showCancelButton="true" type="email"
+      (ionCancel)="isSearchBarOpen=false;setContacts()" (ionInput)="filter($event)" color="dark">
     </ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only *ngIf="!isSearchBarOpen" (click)="isSearchBarOpen=true">
@@ -31,14 +23,18 @@
 
 <ion-content>
 
-  <ion-list>
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)"> -->
+    <!-- <ion-refresher-content> -->
+      <ion-list>
 
-    <button *ngFor="let c of contacts" ion-item class="conversation" (click)="openConversation(c.username)">
-      {{ c.username }}
-      <!-- <ion-badge item-end>5h</ion-badge> -->
-      <ion-icon name="{{ getConversationIcon(c.username) }}" item-end></ion-icon>
-    </button>
+        <button *ngFor="let c of contacts" ion-item class="conversation" (click)="openConversation(c.username)">
+          {{ c.username }}
+          <!-- <ion-badge item-end>5h</ion-badge> -->
+          <ion-icon name="{{ getConversationIcon(c.username) }}" item-end></ion-icon>
+        </button>
 
-  </ion-list>
+      </ion-list>
+    <!-- </ion-refresher-content> -->
+  <!-- </ion-refresher> -->
 
 </ion-content>

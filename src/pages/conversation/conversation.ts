@@ -152,6 +152,9 @@ export class ConversationPage {
     this.navCtrl.push(PhotoViewerPage, {
       img: "data:image/jpeg;base64," + m.plain
     });
+    try {
+      this.deleteMessageFromId(m.messageId);
+    } catch (err) {}
   }
 
   private async requestDeleteMessage(mId: number) {
@@ -198,7 +201,7 @@ export class ConversationPage {
       res.data,
       "MessagesContainer"
     );
-    // TODO: Handle images
+
     for (const m of msg.messages) {
       const fmsg = this.getMessageFromId(m.messageId);
       const boxData = this.crypto.openUserBox(
@@ -262,4 +265,6 @@ export class ConversationPage {
       this.pullMessages();
     }
   }
+
+  ionViewWillLeave() {}
 }

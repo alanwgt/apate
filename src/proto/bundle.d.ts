@@ -623,6 +623,96 @@ export namespace protos {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a MessageRefresh. */
+    interface IMessageRefresh {
+
+        /** MessageRefresh messages */
+        messages?: (protos.IMessage[]|null);
+    }
+
+    /** Represents a MessageRefresh. */
+    class MessageRefresh implements IMessageRefresh {
+
+        /**
+         * Constructs a new MessageRefresh.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: protos.IMessageRefresh);
+
+        /** MessageRefresh messages. */
+        public messages: protos.IMessage[];
+
+        /**
+         * Creates a new MessageRefresh instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MessageRefresh instance
+         */
+        public static create(properties?: protos.IMessageRefresh): protos.MessageRefresh;
+
+        /**
+         * Encodes the specified MessageRefresh message. Does not implicitly {@link protos.MessageRefresh.verify|verify} messages.
+         * @param message MessageRefresh message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: protos.IMessageRefresh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MessageRefresh message, length delimited. Does not implicitly {@link protos.MessageRefresh.verify|verify} messages.
+         * @param message MessageRefresh message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: protos.IMessageRefresh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MessageRefresh message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MessageRefresh
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): protos.MessageRefresh;
+
+        /**
+         * Decodes a MessageRefresh message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MessageRefresh
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): protos.MessageRefresh;
+
+        /**
+         * Verifies a MessageRefresh message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MessageRefresh message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MessageRefresh
+         */
+        public static fromObject(object: { [k: string]: any }): protos.MessageRefresh;
+
+        /**
+         * Creates a plain object from a MessageRefresh message. Also converts values to other types if specified.
+         * @param message MessageRefresh
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: protos.MessageRefresh, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MessageRefresh to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of an AccountHandshake. */
     interface IAccountHandshake {
 

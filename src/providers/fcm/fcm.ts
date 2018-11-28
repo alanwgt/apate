@@ -1,76 +1,98 @@
 import { Injectable } from "@angular/core";
-import { Firebase } from "@ionic-native/firebase";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Platform } from "ionic-angular";
-import { Observable } from "rxjs/Observable";
+import { Platform, NavController, App } from "ionic-angular";
+import { FCM } from "@ionic-native/fcm";
+import { SettingsProvider } from "../settings/settings";
+import { ToastProvider } from "../toast/toast";
+import { ConversationsPage } from "../../pages/conversations/conversations";
+
+export interface FirebaseData {
+  title: string;
+  body: string;
+  mtype:
+    | "Text"
+    | "Image"
+    | "DeleteMessage"
+    | "FriendRequestApproval"
+    | "RemoveContact"
+    | "FriendRequest"
+    | "DenyFriendRequest"
+    | "AddContact";
+  user: string;
+  payload: string;
+  wasTapped: boolean;
+}
 
 @Injectable()
 export class FcmProvider {
   constructor(
-    private firebaseNative: Firebase,
-    private afs: AngularFirestore,
-    private platform: Platform
+    private app: App,
+    private platform: Platform,
+    private fcm: FCM,
+    private settings: SettingsProvider,
+    private toast: ToastProvider
   ) {}
 
   public async init() {
     // TODO: handle me!
-    this.firebaseNative.onTokenRefresh().subscribe((token: string) => {});
-    if (await !this.firebaseNative.hasPermission()) {
-      await this.firebaseNative.grantPermission();
-    }
-    this.firebaseNative.fetch;
-    this.firebaseNative.onNotificationOpen().subscribe(data => {
-      if (data.wasTapped) {
-        //Notification was received on device tray and tapped by the user.
-        console.log("tapped");
-      } else {
-        //Notification was received in foreground. Maybe the user needs to be notified.
-        console.log("not tapped");
+    this.fcm.onNotification().subscribe(
+      (data: FirebaseData) => {
+        console.log(data);
+        this.handleMessage(data);
+        if (
+          data.mtype === "DeleteMessage" ||
+          data.mtype === "RemoveContact" ||
+          data.mtype === "DenyFriendRequest" ||
+          data.mtype === "AddContact"
+        ) {
+          return;
+        }
+        if (data.wasTapped) {
+          //Notification was received on device tray and tapped by the user.
+          this.app.getActiveNav().push(ConversationsPage);
+          // this.navCtrl.push(ConversationsPage);
+        } else {
+          //Notification was received in foreground. Maybe the user needs to be notified.
+          this.toast.success(data.title + " " + data.body, 2000);
+        }
+      },
+      err => {
+        console.error(err);
       }
-      console.log(data);
-    });
+    );
+  }
+
+  private handleMessage(d: FirebaseData) {
+    if (d.mtype === "Text" || d.mtype === "Image") {
+      this.settings.addMessage(d.user, d.payload);
+    } else if (d.mtype === "DeleteMessage") {
+      this.settings.removeMessage(d.user, d.payload);
+    } else if (d.mtype === "RemoveContact") {
+      this.settings.removeContact(d.user);
+    } else if (d.mtype === "FriendRequestApproval") {
+      const fr = this.settings.removeFriendRequest(d.user);
+      if (!fr) {
+        return;
+      }
+      this.settings.addContact(fr);
+    } else if (d.mtype === "FriendRequest") {
+      this.settings.addFriendRequest({
+        username: d.user,
+        pubK: d.payload
+      });
+    } else if (d.mtype === "AddContact") {
+      this.settings.addContact({
+        pubK: d.payload,
+        username: d.user
+      });
+    } else if (d.mtype === "DenyFriendRequest") {
+      this.settings.removeFriendRequest(d.user);
+    }
   }
 
   /**
    * Returns the Firebase Cloud Messaging token
    */
   public async getToken() {
-    let token: string;
-
-    if (this.platform.is("android")) {
-      token = await this.firebaseNative.getToken();
-    } else if (this.platform.is("ios")) {
-      token = await this.firebaseNative.getToken();
-      await this.firebaseNative.grantPermission();
-    } else {
-      console.error("this is not running in a device");
-      return;
-    }
-
-    return token;
-  }
-
-  /**
-   * Stores the FCM token to firestore
-   */
-  public async saveTokenToFirestore(token: string) {
-    if (!token) {
-      return;
-    }
-
-    const devicesRef = this.afs.collection("devices");
-    const docData = {
-      token,
-      userId: "..."
-    };
-
-    return devicesRef.doc(token).set(docData);
-  }
-
-  /**
-   * Returns the observable that is called every time that we have a new notification
-   */
-  public listenToNotifications(): Observable<any> {
-    return this.firebaseNative.onNotificationOpen();
+    return await this.fcm.getToken();
   }
 }

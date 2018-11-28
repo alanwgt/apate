@@ -19,7 +19,10 @@ export type Endpoint =
   | "denyFriendRequest"
   | "deleteUser"
   | "blockUser"
-  | "unblockUser";
+  | "unblockUser"
+  | "refreshMessages"
+  | "recoverAccount"
+  | "proveAccount";
 export type Method = "get" | "post" | "delete" | "put";
 export interface RequestMethod {
   url: string;
@@ -86,6 +89,18 @@ const _endpoints: { [k in Endpoint]: RequestMethod } = {
   unblockUser: {
     method: "delete",
     url: "/block/"
+  },
+  refreshMessages: {
+    method: "get",
+    url: "/refresh"
+  },
+  recoverAccount: {
+    method: "get",
+    url: "/recovery/"
+  },
+  proveAccount: {
+    method: "post",
+    url: "/prove"
   }
 };
 

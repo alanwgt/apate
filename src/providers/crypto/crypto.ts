@@ -56,6 +56,11 @@ export class CryptoProvider {
     await this.loadServerPublicKey();
   }
 
+  public async initPrivateK(pk: Uint8Array) {
+    this.keyPair = nacl.box.keyPair.fromSecretKey(pk);
+    await this.storePrivateKey(this.keyPair.secretKey);
+  }
+
   /**
    * Use this with EXTREME caution, this function will delete the
    * private key from the secure storage!

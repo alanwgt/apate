@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recover Account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <p>Please, write your recovery keys.</p>
+
+  <ion-list>
+    <ion-item>
+      <ion-input type="email" placeholder="username" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" placeholder="Key one" [(ngModel)]="key1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" placeholder="Key two" [(ngModel)]="key2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" placeholder="Key three" [(ngModel)]="key3"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" placeholder="Key four" [(ngModel)]="key4"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full color="secondary" (click)="doRecover()">recover my account!</button>
+
+</ion-content>
