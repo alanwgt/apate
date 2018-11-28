@@ -63,6 +63,10 @@ export class FriendRequestsPage {
       .present();
   }
 
+  /**
+   * Accepts a user friend request
+   * @param un the user's username
+   */
   private async acceptRequest(un: string) {
     const msg = this.crypto.genBoxForServer(this.userProvider.username);
     let res;
@@ -79,6 +83,10 @@ export class FriendRequestsPage {
     }
   }
 
+  /**
+   * Denies a user friend request
+   * @param un the user's username
+   */
   private async denyRequest(un: string) {
     const msg = this.crypto.genBoxForServer(this.userProvider.username);
     let res;

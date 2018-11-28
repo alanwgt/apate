@@ -21,6 +21,7 @@ export class HomePage {
   private friendRequests = 0;
   private userQueryResult: UserQueryResult[] = [];
   private cameraView = "front";
+  userQText = "";
 
   constructor(
     public navCtrl: NavController,
@@ -67,11 +68,13 @@ export class HomePage {
   }
 
   openProfile(username: string) {
+    this.userQueryResult = [];
+    this.userQText = "";
     this.navCtrl.push(ProfilePage, { username });
   }
 
   takePicture() {
-    this.spinnerDialog.show();
+    this.spinnerDialog.show(null, null, true);
 
     this.cameraPreview
       .takePicture({
@@ -91,6 +94,7 @@ export class HomePage {
 
   clear() {
     this.userQueryResult = [];
+    this.userQText = "";
   }
 
   openSettings() {
@@ -132,7 +136,7 @@ export class HomePage {
       return;
     }
 
-    this.spinnerDialog.show();
+    this.spinnerDialog.show(null, null, true);
     this.userQueryResult = await this.userProvider.queryUsername(val);
     this.spinnerDialog.hide();
   }

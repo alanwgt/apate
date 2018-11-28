@@ -1522,6 +1522,7 @@ $root.protos = (function() {
          * @property {Array.<protos.IUserModel>|null} [contacts] AccountHandshake contacts
          * @property {Array.<protos.IFriendRequest>|null} [friendRequests] AccountHandshake friendRequests
          * @property {Array.<protos.IMessage>|null} [newMessages] AccountHandshake newMessages
+         * @property {Array.<protos.IUserModel>|null} [blockedUsers] AccountHandshake blockedUsers
          * @property {boolean|null} [hasRecoveryKey] AccountHandshake hasRecoveryKey
          */
 
@@ -1537,6 +1538,7 @@ $root.protos = (function() {
             this.contacts = [];
             this.friendRequests = [];
             this.newMessages = [];
+            this.blockedUsers = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1566,6 +1568,14 @@ $root.protos = (function() {
          * @instance
          */
         AccountHandshake.prototype.newMessages = $util.emptyArray;
+
+        /**
+         * AccountHandshake blockedUsers.
+         * @member {Array.<protos.IUserModel>} blockedUsers
+         * @memberof protos.AccountHandshake
+         * @instance
+         */
+        AccountHandshake.prototype.blockedUsers = $util.emptyArray;
 
         /**
          * AccountHandshake hasRecoveryKey.
@@ -1608,8 +1618,11 @@ $root.protos = (function() {
             if (message.newMessages != null && message.newMessages.length)
                 for (var i = 0; i < message.newMessages.length; ++i)
                     $root.protos.Message.encode(message.newMessages[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.blockedUsers != null && message.blockedUsers.length)
+                for (var i = 0; i < message.blockedUsers.length; ++i)
+                    $root.protos.UserModel.encode(message.blockedUsers[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.hasRecoveryKey);
+                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.hasRecoveryKey);
             return writer;
         };
 
@@ -1660,6 +1673,11 @@ $root.protos = (function() {
                     message.newMessages.push($root.protos.Message.decode(reader, reader.uint32()));
                     break;
                 case 4:
+                    if (!(message.blockedUsers && message.blockedUsers.length))
+                        message.blockedUsers = [];
+                    message.blockedUsers.push($root.protos.UserModel.decode(reader, reader.uint32()));
+                    break;
+                case 5:
                     message.hasRecoveryKey = reader.bool();
                     break;
                 default:
@@ -1724,6 +1742,15 @@ $root.protos = (function() {
                         return "newMessages." + error;
                 }
             }
+            if (message.blockedUsers != null && message.hasOwnProperty("blockedUsers")) {
+                if (!Array.isArray(message.blockedUsers))
+                    return "blockedUsers: array expected";
+                for (var i = 0; i < message.blockedUsers.length; ++i) {
+                    var error = $root.protos.UserModel.verify(message.blockedUsers[i]);
+                    if (error)
+                        return "blockedUsers." + error;
+                }
+            }
             if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
                 if (typeof message.hasRecoveryKey !== "boolean")
                     return "hasRecoveryKey: boolean expected";
@@ -1772,6 +1799,16 @@ $root.protos = (function() {
                     message.newMessages[i] = $root.protos.Message.fromObject(object.newMessages[i]);
                 }
             }
+            if (object.blockedUsers) {
+                if (!Array.isArray(object.blockedUsers))
+                    throw TypeError(".protos.AccountHandshake.blockedUsers: array expected");
+                message.blockedUsers = [];
+                for (var i = 0; i < object.blockedUsers.length; ++i) {
+                    if (typeof object.blockedUsers[i] !== "object")
+                        throw TypeError(".protos.AccountHandshake.blockedUsers: object expected");
+                    message.blockedUsers[i] = $root.protos.UserModel.fromObject(object.blockedUsers[i]);
+                }
+            }
             if (object.hasRecoveryKey != null)
                 message.hasRecoveryKey = Boolean(object.hasRecoveryKey);
             return message;
@@ -1794,6 +1831,7 @@ $root.protos = (function() {
                 object.contacts = [];
                 object.friendRequests = [];
                 object.newMessages = [];
+                object.blockedUsers = [];
             }
             if (options.defaults)
                 object.hasRecoveryKey = false;
@@ -1811,6 +1849,11 @@ $root.protos = (function() {
                 object.newMessages = [];
                 for (var j = 0; j < message.newMessages.length; ++j)
                     object.newMessages[j] = $root.protos.Message.toObject(message.newMessages[j], options);
+            }
+            if (message.blockedUsers && message.blockedUsers.length) {
+                object.blockedUsers = [];
+                for (var j = 0; j < message.blockedUsers.length; ++j)
+                    object.blockedUsers[j] = $root.protos.UserModel.toObject(message.blockedUsers[j], options);
             }
             if (message.hasRecoveryKey != null && message.hasOwnProperty("hasRecoveryKey"))
                 object.hasRecoveryKey = message.hasRecoveryKey;

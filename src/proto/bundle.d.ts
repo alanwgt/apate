@@ -635,6 +635,9 @@ export namespace protos {
         /** AccountHandshake newMessages */
         newMessages?: (protos.IMessage[]|null);
 
+        /** AccountHandshake blockedUsers */
+        blockedUsers?: (protos.IUserModel[]|null);
+
         /** AccountHandshake hasRecoveryKey */
         hasRecoveryKey?: (boolean|null);
     }
@@ -656,6 +659,9 @@ export namespace protos {
 
         /** AccountHandshake newMessages. */
         public newMessages: protos.IMessage[];
+
+        /** AccountHandshake blockedUsers. */
+        public blockedUsers: protos.IUserModel[];
 
         /** AccountHandshake hasRecoveryKey. */
         public hasRecoveryKey: boolean;

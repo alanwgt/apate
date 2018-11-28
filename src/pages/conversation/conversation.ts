@@ -106,7 +106,6 @@ export class ConversationPage {
   async handleSendMessage() {
     // push the message to the view
     let msg = this.messageBody;
-    console.log(msg);
     if (!msg || msg.length === 0) {
       // open camera
       return;
@@ -122,10 +121,11 @@ export class ConversationPage {
     );
 
     let res: AxiosResponse<protos.ServerResponse>;
+    let mId: number;
 
     try {
-      // res = await this.req.post("sendMessage", sMsg, this.username);
       res = await this.req.request("sendMessage", sMsg, this.username);
+      mId = parseInt(res.data.message);
     } catch (err) {
       this.toast.error(this.req.parseError(err));
       return;
@@ -138,7 +138,8 @@ export class ConversationPage {
       timestamp: Math.round(new Date().getTime() / 1000),
       from: this.userProvider.username,
       to: this.username,
-      type: protos.MessageBody.Type.Text
+      type: protos.MessageBody.Type.Text,
+      messageId: mId
     });
     this.messageBody = "";
   }
@@ -153,14 +154,30 @@ export class ConversationPage {
     });
   }
 
-  private async requestDeleteMessage(mId: number) {}
+  private async requestDeleteMessage(mId: number) {
+    this.spinner.show("Deleting message...", null, true);
+    const message = this.crypto.genBoxForServer(this.userProvider.username);
+    try {
+      const res = await this.req.request("deleteMessage", message, "" + mId);
+      this.deleteMessageFromId(mId);
+      if (res.data.status === protos.ServerResponse.Status.Ok) {
+        this.toast.success("Message deleted.", 2000);
+      } else {
+        this.toast.error(res.data.message);
+      }
+    } catch (err) {
+      this.toast.error(this.req.parseError(err));
+    } finally {
+      this.spinner.hide();
+    }
+  }
 
   /**
    * Pulls all the messages from the current conversation and put them into this.messages
    * it also removes the messages from settings
    */
   private async pullMessages() {
-    this.spinner.show();
+    this.spinner.show("Downloading messages...", null, true);
     let mIds: number[] = [];
 
     for (const mess of this.msgsOnly) {
@@ -214,6 +231,21 @@ export class ConversationPage {
     return undefined;
   }
 
+  private deleteMessageFromId(id: number | Long) {
+    for (let i = 0; i < this.msgsOnly.length; i++) {
+      if (this.msgsOnly[i].messageId === id) {
+        this.msgsOnly.splice(i, 1);
+        break;
+      }
+    }
+    for (let i = 0; i < this.messages.length; i++) {
+      if (this.messages[i].messageId === id) {
+        this.messages.splice(i, 1);
+        break;
+      }
+    }
+  }
+
   private onChange(input: TextInput) {
     if (input.value && input.value.length > 0) {
       this.sendMessageIcon = "ios-send";
@@ -221,8 +253,6 @@ export class ConversationPage {
       this.sendMessageIcon = "ios-camera";
     }
   }
-
-  ionViewDidEnter() {}
 
   async ionViewWillEnter() {
     this.msgsOnly = this.settings.getMessagesFromUser(this.username);

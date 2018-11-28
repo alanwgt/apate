@@ -1,32 +1,19 @@
 <ion-content>
 
-  <!-- <div class="search-wrapper">
-    <ion-item id="search">
-      <ion-label><ion-icon name="search"></ion-icon></ion-label>
-      <ion-input type="email" clearInput placeholder="search for user..." (keyup)="userQ($event.target.value)"></ion-input>
-    </ion-item>
-    <button (click)="openSettings()">
-      <ion-badge *ngIf="friendRequests > 0" class="a-badge">{{ friendRequests }}</ion-badge>
-      <ion-icon name="settings"></ion-icon>
-    </button>
-  </div> -->
-
   <ion-fab class="mfab reverse-camera">
     <button ion-fab large (click)="reverseCamera()">
       <ion-icon name="reverse-camera-outline"></ion-icon>
     </button>
   </ion-fab>
 
-  <!-- <ion-fab class="mfab wand">
-    <button ion-fab large (click)="applyEffect()">
-      <ion-icon name="color-wand-outline"></ion-icon>
-    </button>
-  </ion-fab>
-   -->
-
   <div class="searchbar">
-    <ion-searchbar type="email" showCancelButton="false" placeholder="search for username..." (ionInput)="userQ($event)"
-      (ionClear)="clear()">
+    <ion-searchbar
+        type="email"
+        [(ngModel)]="userQText"
+        showCancelButton="false"
+        placeholder="search for username..."
+        (ionInput)="userQ($event)"
+        (ionClear)="clear()">
     </ion-searchbar>
   </div>
 

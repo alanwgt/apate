@@ -45,5 +45,6 @@ message AccountHandshake {
     repeated UserModel contacts = 1;
     repeated FriendRequest friend_requests = 2;
     repeated Message new_messages = 3;
-    bool has_recovery_key = 4;
+    repeated UserModel blocked_users = 4;
+    bool has_recovery_key = 5;
 }

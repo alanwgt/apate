@@ -13,14 +13,19 @@
 
   <div class="messages">
 
-    <div *ngFor="let msg of messages" class="message-container">
+    <div *ngFor="let msg of messages" class="message-container mc-{{ msg.cssClass }}">
 
-      <p *ngIf="!hasImage(msg)" class="{{ msg.cssClass }}">{{ msg.plain }}
-        <span class="timestamp">{{ getElapsedTime(msg.timestamp) }}</span>
-      </p>
+      <button *ngIf="msg.deletable" class="deletable" (click)="deleteMessage(msg.messageId)">
+        <ion-icon name="close"></ion-icon>
+      </button>
 
-      <p *ngIf="hasImage(msg)" class="{{ msg.cssClass }}">
-        <img src="/assets/imgs/ghost.svg" alt="" (click)="openImage(msg)">
+      <p *ngIf="!hasImage(msg)" class="msg {{ msg.cssClass }}">{{ msg.plain.trim() }}<span class="timestamp">{{ getElapsedTime(msg.timestamp) }}</span></p>
+
+      <p *ngIf="hasImage(msg)" class="msg {{ msg.cssClass }}">
+        <button icon-only class="meye" (click)="openImage(msg)">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <img src="/assets/imgs/picture.svg" alt="">
         <span class="timestamp timestamp-img">{{ getElapsedTime(msg.timestamp) }}</span>
       </p>
 

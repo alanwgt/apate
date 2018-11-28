@@ -9,16 +9,16 @@ pages:
   conversations:
     ☐ find better suitted icons
 
-src:
-  crypto:
-    ☐ crypto needs to access the storage to retrieve the secret key
+crypto:
+  ✔ crypto needs to access the storage to retrieve the secret key @done(18-11-22 16:20)
 
 random:
   ☐ manage android permissions
+  ✔ remove all associated data with sent messages @done(18-11-22 16:20)
 
 
 about page:
-  ☐ ref author icon Freepik on flaticon (splash ghost)
+  ✔ ref author icon Freepik on flaticon (splash ghost) @done(18-11-23 18:45)
 
 Compile Protos to static
 npx pbjs -t static-module -w commonjs -o ./src/proto/bundle.js ./src/proto/*.proto

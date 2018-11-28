@@ -12,6 +12,25 @@ export class FcmProvider {
     private platform: Platform
   ) {}
 
+  public async init() {
+    // TODO: handle me!
+    this.firebaseNative.onTokenRefresh().subscribe((token: string) => {});
+    if (await !this.firebaseNative.hasPermission()) {
+      await this.firebaseNative.grantPermission();
+    }
+    this.firebaseNative.fetch;
+    this.firebaseNative.onNotificationOpen().subscribe(data => {
+      if (data.wasTapped) {
+        //Notification was received on device tray and tapped by the user.
+        console.log("tapped");
+      } else {
+        //Notification was received in foreground. Maybe the user needs to be notified.
+        console.log("not tapped");
+      }
+      console.log(data);
+    });
+  }
+
   /**
    * Returns the Firebase Cloud Messaging token
    */

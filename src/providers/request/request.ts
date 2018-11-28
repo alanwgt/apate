@@ -16,7 +16,10 @@ export type Endpoint =
   | "sendMessage"
   | "storeRecKey"
   | "acceptFriendRequest"
-  | "denyFriendRequest";
+  | "denyFriendRequest"
+  | "deleteUser"
+  | "blockUser"
+  | "unblockUser";
 export type Method = "get" | "post" | "delete" | "put";
 export interface RequestMethod {
   url: string;
@@ -48,6 +51,10 @@ const _endpoints: { [k in Endpoint]: RequestMethod } = {
     method: "post",
     url: "/user/"
   },
+  deleteUser: {
+    method: "delete",
+    url: "/user/"
+  },
   loadMessage: {
     method: "get",
     url: "/message/"
@@ -71,6 +78,14 @@ const _endpoints: { [k in Endpoint]: RequestMethod } = {
   denyFriendRequest: {
     method: "delete",
     url: "/fr/"
+  },
+  blockUser: {
+    method: "post",
+    url: "/block/"
+  },
+  unblockUser: {
+    method: "delete",
+    url: "/block/"
   }
 };
 
@@ -203,9 +218,11 @@ export class RequestProvider {
    * @param err
    */
   public parseError(err: any): string {
+    if (err.response && err.response.data && err.response.data.message) {
+      return err.response.data.message;
+    }
     if (err.response && err.response.data) {
-      const decoded = naclString.decodeBase64(err.response.data);
-      return protos.ServerResponse.decode(decoded).message;
+      return JSON.stringify(err.response.data);
     }
     if (err.message) {
       return err.message;

@@ -10,17 +10,13 @@ import { ToastController } from "ionic-angular";
 
 import { CryptoProvider } from "../../providers/crypto/crypto";
 import { UserProvider } from "../../providers/user/user";
-import {
-  NetworkProvider,
-  ConnectionStatus
-} from "../../providers/network/network";
-import naclString from "tweetnacl-util";
+import { NetworkProvider } from "../../providers/network/network";
 
 import Funnies from "funnies";
 import { protos } from "../../proto/bundle";
 import { RequestProvider } from "../../providers/request/request";
-import { AxiosResponse } from "axios";
 import { SettingsProvider } from "../../providers/settings/settings";
+import { FcmProvider } from "../../providers/fcm/fcm";
 
 @IonicPage()
 @Component({
@@ -50,7 +46,8 @@ export class SplashPage {
     private userProvider: UserProvider,
     private platform: Platform,
     private request: RequestProvider,
-    private settings: SettingsProvider
+    private settings: SettingsProvider,
+    private fcm: FcmProvider
   ) {
     this.funnies = new Funnies();
   }
@@ -66,6 +63,7 @@ export class SplashPage {
     try {
       await this.crypto.init();
       await this.userProvider.init();
+      await this.fcm.init();
 
       // check if the user is authenticated, if not, there is no need to perform a handshake
       if (!this.userProvider.isAuthenticated()) {
